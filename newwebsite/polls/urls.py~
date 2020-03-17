@@ -1,0 +1,104 @@
+from django.conf.urls import url
+from . import views
+from django.contrib.auth import views as auth_views
+
+app_name = 'polls'
+
+urlpatterns = [
+
+#user
+    url(r'^register/$', views.register, name='register' ),
+    url('^login/', auth_views.LoginView.as_view(template_name='polls/login.html'), name='login'),
+    url(r'^logout/$', auth_views.LogoutView.as_view(template_name='polls/logout.html'),name='logout'),
+#profile
+    url(r'^profile/$',views.profile, name='profile'),
+#end file upload
+
+
+#novel
+#novel new item form
+    url(r'^novel/add/$', views.NovelCreate.as_view(), name='novel_add'),
+#novel_index display
+    url(r'^novel/novel_index$', views.NovelIndexView.as_view(), name='novel_index'),
+#novel_detail display
+    url(r'^novel/novel_index/(?P<pk>[0-9]+)/$', views.NovelDetailView.as_view(), name='novel_detail'),
+#novel
+
+
+#etx
+#etx new item form
+    url(r'^etx/add/$', views.EtxCreate.as_view(), name='etx_add'),
+#etx_index display
+    url(r'^etx/etx_index$', views.EtxIndexView.as_view(), name='etx_index'),
+#etx_detail display
+    url(r'^etx/etx_index/(?P<pk>[0-9]+)/$', views.EtxDetailView.as_view(), name='etx_detail'),
+#endetx
+
+
+#enotes
+#enotes new item form
+    url(r'^enotes/add/$', views.EnotesCreate.as_view(), name='enotes_add'),
+#enotes_index display
+    url(r'^enotes/enotes_index$', views.EnotesIndexView.as_view(), name='enotes_index'),
+#enotes_detail display
+    url(r'^enotes/enotes_index/(?P<pk>[0-9]+)/$', views.EnotesDetailView.as_view(), name='enotes_detail'),
+#enotes
+
+
+#ebook
+#ebook new item form
+    url(r'^ebook/add/$', views.EbookCreate.as_view(), name='ebook_add'),
+#ebook_index display
+    url(r'^ebook/ebook_index$', views.EbookIndexView.as_view(), name='ebook_index'),
+#ebook_detail display
+    url(r'^ebook/ebook_index/(?P<pk>[0-9]+)/$', views.EbookDetailView.as_view(), name='ebook_detail'),
+#ebook
+
+
+#four url: homepage(books),detailview,form new user,form new book
+    #create owner
+    url(r'owner/add/$', views.OwnerCreate.as_view(), name='owner-add'),
+#enggbook
+    #book new item form
+    url(r'book/add/$', views.BookCreate.as_view(), name='book-add'),
+    #book update item form
+    url(r'book/(?P<pk>[0-9]+)/update/$', views.BookUpdate.as_view(), name='book-update'),
+    #book delete item form
+    url(r'(?P<pk>[0-9]+)/delete/$', views.DeleteView.as_view(), name='book-delete'),
+    #homepage:book_index display   
+    url(r'^$', views.IndexView.as_view(), name='index'),
+    #book_detail display
+    url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
+#endenggbook
+#endFourUrl
+
+
+
+    #url(r'^(?P<question_id>[0-9]+)/favourite/$', views.favourite, name='favourite'),
+    # ex: /polls/
+    #url(r'^register/$', views.UserFormView.as_view(), name='register'),
+	#register
+
+    #url(r'^(?P<question_id>[0-9]+)/results/$', views.results, name='results'),
+    # ex: /polls/5/vote/
+    #url(r'^(?P<question_id>[0-9]+)/vote/$', views.vote, name='vote'),
+    #
+    #url(r'^(?P<question_id>[0-9]+)/temp/$', views.vote, name='temp'),
+    #
+    #url(r'^(owner_form)/$', views.get_name, name='get_name'),
+    #
+    #url(r'^(logsin_form)/$', views.log, name='log'),
+    #
+    #url(r'^(?P<book_data_form>book_form)/$', views.get_book_details, name='get_book_details'),
+]
+
+'''
+#user_views
+    url(r'^register/$',user_views.register,name='register'),
+
+#end user_views
+
+#url(r'^register/',include('user_views.register,name="register" ')),
+
+'''
+

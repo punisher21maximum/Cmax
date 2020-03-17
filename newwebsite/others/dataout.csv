@@ -1,0 +1,11 @@
+id   book_name   pdf         book_  book_sub    book_yea  author    edition   sell_pri  rent_pri  rent_pri  owner_id    book_image     
+---  ----------  ----------  -----  ----------  --------  --------  --------  --------  --------  --------  ----------  ---------------
+1    kk                      CS     DS          I         kkk       2019      500       400       100       1           add_new_etx.png
+2    my_book_up              CS     EI          I         you are   2019      400       100       60        1           add_new_enotes.
+3    hugo                    IT     DSGT        II        kash      2017      300       100       50        2           Screenshot_from
+4    rdsharma                FY     AM2         I         rdsharma  2009      400       200       100       2           add_new_novel.p
+5    BV RAMANA               FY     MATHS       I         BV RAMAN  2008      600       200       50        1           bv.jpg         
+6    KORTH                   CS     DBMS        II        korth     2015      400       200       100       1           korth.jpg      
+9    kamikaze                CS     MATHS       IV        eminem    2011      300       100       50        1           book/pdf/no_ima
+10   python inf  pdf         cs     programmig  2016      vishal    6         550                           1           book/pdf/no_ima
+11   django      pdf         cs     programmig  2012      monty     6         250                           1           image          

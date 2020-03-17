@@ -1,0 +1,170 @@
+{% extends 'polls/base.html' %}
+{% load static %}
+{% load bootstrap %}
+{% load crispy_forms_tags %}
+
+<!--link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}"-->
+<!--border: 5px solid purple ; box-sizing: border-box; border-radius: 7px;-->
+{% block body %}
+<!--fullpage-->
+<div class="index_page_bg">
+     <!-- search bar -->
+  <div class="row" style="padding-top: 50px;   "> 
+      <div class="col-lg-12 " >  
+        <!-- filters -->
+          <div class="filter_index_engg container-fluid   "
+          style=" width: 98%;font-size:30px;padding: 5px 15px 5px 15px;color:#7754ab; "> 
+            <form method="GET">
+              <div class="form-row">
+                                      <div class="form-group col-md-1">
+                                 
+                                      </div>
+<div class="form-group col-md-2"> 
+   {{ filter.form.enotes_branch|as_crispy_field }}
+   {{ filter.form.owner__username|as_crispy_field }}
+</div>
+                                    <div class="form-group col-md-2">
+                                      {{ filter.form.enotes_sub|as_crispy_field }}
+                                      {{ filter.form.enotes_desc|as_crispy_field }}    
+                                    </div>
+<div class="form-group col-md-2">
+  {{ filter.form.enotes_year|as_crispy_field }}  
+  {{ filter.form.enotes_author|as_crispy_field }} 
+</div>
+
+                                    <div class="form-group col-md-3">
+                                        {{ filter.form.enotes_topic|as_crispy_field }}
+                                        <div class="form-row">
+                                            <div class="form-group col-md-6">
+                                              {{ filter.form.enotes_unit|as_crispy_field }}  
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                              {{ filter.form.enotes_date|as_crispy_field }}  
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+<div class="form-group col-md-2" style='padding:17px;'>
+   
+  <button type="submit" class="text-center button_engg btn-block  ">
+    <p class="text-center " style="font-size: 120%; ">search</p>
+  </button> 
+  <br> 
+  <h6>{{ 'Date format'}}</h6>
+  <h6>{{ '2019-09-29'}}</h6>
+</div>
+                                        <div class="form-group col-md-1">    
+
+                                        </div>  
+          
+              </div>  
+            </form>  
+          </div >
+         
+        <!-- filters end--> 
+      </div >
+  </div >
+  <!-- search bar and filters  end -->
+
+    <!-- albums and filters -->
+    <div class="row" style="padding-top: 50px;   ">
+
+        <!-- filters -->
+        <div class="col-lg-2 " >  
+                <div class="albums-container container-fluid filter_index" 
+                    style="width: 90%;"> 
+                        <div style="font-size:30px;">
+                        
+                        </div>   
+                </div > 
+        </div >  
+        <!-- filters end-->              
+<br><br>
+        <!-- album -->
+        <div class="col-lg-8 index_middle_bg" style="padding: 10px 30px;"> 
+            
+            <!--book start-->
+            <div class="row" style="font-size:35px;">                                               
+            {% if object_list %}
+            {% for enotes_model in  filter.qs %}                                                                     
+                    <div class="card " style="width: 33.333%;padding:50px;padding-top:30px;">
+                        {% if enotes_model.enotes_image %}
+                            <a href="{% url 'polls:enotes_detail' enotes_model.id  %}">
+                <img class="card-img-top img-responsive" src="{{ enotes_model.enotes_image.url }}"   alt="Card image cap"
+                            style=" padding: 80px; height:400px;">
+                            </a>
+                            {% endif %}
+                        <div class="card-body" >
+                            <h5 style="color:#533b78">{{enotes_model.owner.username }}</h5>
+
+                            <b style="color:#533b78;font:15px;">{{enotes_model.enotes_topic  }}</b>
+                            <i style="color: #241933 ;font-size:20px;">{{enotes_model.enotes_author }}</i><br>
+
+                            
+
+                            <div class='row' style='color:#533b78;text-align:right'>
+                                <div class='col-6'>
+                                     
+                                </div>
+                                <div class='col-6' style=' text-align:right'>
+                                    <b>Unit : {{ enotes_model.enotes_unit }}</b>
+                                </div>  
+                            </div>
+                                 
+
+
+                            </p><hr>
+
+                            <h2 style="color:#8465b3;"> 
+                                 </br>
+                                Branch :{{ enotes_model.enotes_branch }} </br>
+                                Subject : {{enotes_model.enotes_sub }}    </br>
+                                Year : {{enotes_model.enotes_year }}      </br>
+                                </br>
+                                 
+                            </h2><hr>
+                            {% if enotes_model.enotes_desc  %}
+                                <p style="color:#8465b3;font-size:25px;"> {{ enotes_model.enotes_desc }} </p><hr>
+                            {% else %}
+                            <p style="color:#8465b3;font-size:25px;"> {{ '...happy reading... ' }} </p><hr>
+                            
+                            {% endif %} 
+                            
+                            <h3 style="color:#8465b3;" class='text-center'><b>{{enotes_model.enotes_date }}</b></h3><br>                                                         
+                            
+                            <a href="{% url 'polls:enotes_detail' enotes_model.id  %}" class="text-center button_engg btn-block btn-lg" role="button"><b>MORE</b></a>
+                        </div>
+                    </div>
+                
+             
+            {% endfor %}
+            {% else %}
+                <h1 class=" col-sm-12 detail_heading" style="width: 100%";>  NO BOOKS </h1> 
+            {% endif %}
+          
+            <!--book end-->
+                                    
+            <!--paginator --> 
+            <div class="col-lg-12  " >            
+              {% include "polls/side_bar_paginator.html" %}                 
+            </div>
+            <!--paginator end-->  
+                                    
+        </div>
+        <!-- album  end-->
+
+     </div > 
+     <!-- album filter end-->
+             <!-- right side bar -->
+      <div class="col-lg-2  " >  
+                {% include "polls/side_bar_all.html" %} 
+      </div >
+      <!-- right side bar end -->
+    </div>
+
+    
+</div>
+{% endblock %}
+

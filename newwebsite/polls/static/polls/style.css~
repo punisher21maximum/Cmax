@@ -1,0 +1,16 @@
+li a {
+    color: green;
+}
+
+h3 {
+    color: green;
+}
+
+body {
+    background: white url("/static/images/rubik.jpeg") no-repeat right bottom;
+}
+
+
+body {
+    background: url('{{ STATIC_URL }}polls/images/rubik.jpg'
+}

@@ -1,0 +1,164 @@
+{% extends 'polls/base.html' %}
+{% load static %}
+{% load bootstrap %}
+{% load crispy_forms_tags %}
+
+<!--link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}"-->
+<!--border: 5px solid purple ; box-sizing: border-box; border-radius: 7px;-->
+
+{% block body %}
+<!--fullpage-->
+<div class=" " style='padding-top: 10px;   padding-bottom: 1000px;'>
+
+  <!-- search bar -->
+  <div class="row" style="padding-top: 50px;   "> 
+      <div class="col-lg-12 " >  
+        <!-- filters -->
+          <div class="filter_index_engg container-fluid   "
+          style=" width: 98%;font-size:30px;padding: 5px 15px 5px 15px;color:#7754ab; "> 
+            <form method="GET">
+              <div class="form-row">
+                                      <div class="form-group col-md-1">
+                                      {{ filter.form.sell_price__gt|as_crispy_field }}
+                                      {{ filter.form.sell_price__lt|as_crispy_field }} 
+                                      </div>
+<div class="form-group col-md-2"> 
+   {{ filter.form.book_branch|as_crispy_field }}
+   {{ filter.form.owner__username|as_crispy_field }}
+</div>
+                                    <div class="form-group col-md-2">
+                                      {{ filter.form.book_sub|as_crispy_field }}
+                                      {{ filter.form.ordering|as_crispy_field }}    
+                                    </div>
+<div class="form-group col-md-2">
+  {{ filter.form.book_year|as_crispy_field }}   
+</div>
+
+                                      <div class="form-group col-md-3">
+                                        {{ filter.form.book_name|as_crispy_field }}
+                                        {{ filter.form.author|as_crispy_field }} 
+                                      </div>
+<div class="form-group col-md-2" style='padding:17px;'>
+   
+  <button type="submit" class="text-center button_engg btn-block  ">
+    <p class="text-center " style="font-size: 120%; ">search</p>
+  </button> 
+</div>
+                                        <div class="form-group col-md-1">    
+
+                                        </div>  
+          
+              </div>  
+            </form>  
+          </div >
+          <!--{{ filter.form.book_name|as_crispy_field }}  {{ filter.form|crispy }} -->
+        <!-- filters end--> 
+      </div >
+  </div >
+  <!-- search bar and filters  end -->
+
+
+  <!-- left side bar + middle + right side bar  -->
+  <div class="row" style="padding-top:50px;">
+
+      <!-- left side bar    -->  
+      <div class="col-lg-2 "  >  
+        <!-- filters -->
+          {% include "polls/side_bar_all.html" %} 
+          <!--{{ filter.form.book_name|as_crispy_field }}  {{ filter.form|crispy }} -->
+        <!-- filters end--> 
+      </div > <br><br>
+      <!-- left side bar end -->   
+                     
+
+      <!--books + paginator-->
+      <div class="col-lg-8 index_middle_bg" style="padding: 10px 30px;"> 
+
+            <!--books start-->
+            <div class="row  " style="font-size:35px;">                                  
+            {% if  object_list and filter.qs %}
+              {% for model in  filter.qs %}
+                <!-- card start -->                                                                                                                                  
+                <div class="card " style="width: 33.333%;padding:30px;padding-top:30px;color:green;">
+
+                    {% if model.book_image %}
+
+                    <a href="{% url 'polls:detail' model.id  %}">
+                      <img class="card-img-top img-responsive" src="{{ model.book_image.url }}"   
+                      alt="Card image cap" style=" padding: 80px; height:400px;">
+                    </a>
+
+                    {% endif %}
+                 
+
+
+                      <div class="card-body" >
+                            <h5 style="color:#533b78">{{model.owner.username }}</h5>
+ 
+                            <b style="color:#533b78;font:15px;">{{model.book_name }}</b>
+                            <i style="color: #241933 ;font-size:20px;">{{model.author }}</i>
+
+                            <div style="text-align:right;color:#533b78;">
+                                Rs : {{model.sell_price }}
+                            </div>
+
+                            <hr>
+
+                            <h2 style="color:#8465b3;"> 
+                              Branch :{{ model.book_branch }} </br>
+                              Sub : {{model.book_sub }}    </br>
+                              Year : {{model.book_year }}      </br>
+                            </h2>
+                                                                                        
+                            <hr>
+
+                            <div style='font-size:30px;color:#6b4c9a;'  >
+                                <i>Rent:</i>&nbsp;&nbsp;
+                                <b  >{{model.rent_price_per_day }}/day</b>&nbsp;&nbsp;
+                                <b  >{{model.rent_price_per_week}}/week</b><hr>    
+                            </div>
+
+                            <br>
+
+                            <a href="{% url 'polls:detail' model.id  %}" 
+                            class="text-center button_engg btn-block btn-lg" role="button"><b>MORE</b></a>
+
+                             
+                      </div>
+                </div>
+                <!-- card end --> 
+                
+              {% endfor %}
+            {% else %}
+
+                <h1 class=" col-sm-12 detail_heading" style="width: 100%";>  NO BOOKS </h1> 
+
+            {% endif %}
+            </div>
+            <!--book end-->
+            <!--paginator --> 
+            <div class="col-lg-12  " >            
+              {% include "polls/side_bar_paginator.html" %}                 
+            </div>
+            <!--paginator end-->                        
+            
+                                    
+      </div>
+      <!-- books + paginator end-->
+
+
+      <!-- right side bar -->
+      <div class="col-lg-2  " >  
+                {% include "polls/side_bar_etx.html" %} 
+      </div >
+      <!-- right side bar end -->
+
+  </div > 
+  <!-- left side bar + middle + right side bar end-->
+</div>
+<!--fullpage end-->
+{% endblock %}
+
+ <!--star begin <a href="{{ model.get_add_to_fav_url }}" class="btn btn-success btn-md">
+          Add to fav        
+</a>--><!--star end-->

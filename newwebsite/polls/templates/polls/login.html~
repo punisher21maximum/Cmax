@@ -1,0 +1,91 @@
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+{% block body %}
+<div style="padding-top: 0px;padding-bottom: 1000px;padding-left:350px;background-image:url('');">
+
+<div class="container-fluid center" 
+style="
+margin:100px;
+color:#004d00;
+background-color: #e6e6e6;
+font-family:Verdana  ;
+border: 5px solid purple
+padding-top: 0px;
+box-sizing: border-box;
+width: 1000px;
+border-radius: 7px;border:solid #f2f2f2 15px;
+
+text-transform: capitalize;letter-spacing: 2px;
+">
+
+     <div class="row" style="font-size: 20px; margin:100px ; ">
+
+        <div class="col-sm-12 col-md-7" >
+            <div class="panel panel-default" ">
+                <div class="panel-body">
+                    <h3 style="text-align: center;border-radius: 3px;border:solid #f2f2f2 5px;text-decoration: underline;
+ margin:100px ; font-size: 50px;" 
+      >CONVIMAX</h3>
+ 
+<div>
+
+<form  class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <!--input type="submit" value="Submit" /-->
+  <div class="form-group" style="padding: 30px;">
+          <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-success btn-block ">Submit</button>
+          </div>
+   </div>
+</form>
+
+<div class="navbar-nav">
+              {% if seller.is_authenticated %}
+                
+                <a class="nav-item nav-link" href="{% url 'polls:logout' %}">Logout</a>
+              {% else %}
+                <a class="nav-item nav-link" href="{% url 'polls:login' %}">Login</a>
+                <a class="nav-item nav-link" href="{% url 'polls:register' %}">Register</a>
+              {% endif %}
+        </div>
+<hr>
+    <div>
+            <h1><a href="{% url 'polls:register'  %}"> Register/Sign Up</h1>
+    </div>
+<hr>
+
+</div>
+ </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-5">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>What is ConviMax?</h3>
+                    <p>ConviMax is a website that allows you to upload or download or contact a seller.</p>
+                    <h3>How do you upload or sell</h3>
+                    <p>First, create a your id . Once id is created upload or download or contact seller.</p>
+                    <h3>What are some image logo best practices?</h3>
+                    <ul>
+                        <li>Have a resolution of 512x512</li>
+                        <li>Use common image formats such as .JPG, .GIF, or .PNG</li>
+                        <li>Remain under the 2MB limit.</li>
+                        <li>Square images look best</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</div>
+
+{% endblock %}
+

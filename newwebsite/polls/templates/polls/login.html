@@ -1,0 +1,54 @@
+{% load static %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Login convimax</title>
+
+<link rel="stylesheet" type="text/css"  href="{% static 'polls/bootstrap/css/bootstrap.min.css' %}"/>
+<link rel="stylesheet" type="text/css"  href="{% static 'polls/css/global.css' %}">
+<!-- my written  -->
+<link rel="stylesheet" type="text/css"  href="{% static 'polls/css/style_login.css' %}">
+</head>
+<body>
+
+{% block body %}
+
+<div class="row"  >
+  
+
+<div class="col-lg-4"  ></div>
+<div class="col-lg-4 login_column"  >
+        <form  class="form-container form_text  login_style" role="form" action="" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <h1 class='cmax_text text-center ' > ConviMax </h1><br>
+          <hr>
+              <div  class=' '> 
+                {{ form|crispy }}<br>
+                <button type="submit" class="btn btn-danger btn-block "  ><h3>Submit</h3></button><hr>
+
+                <h1><a class='form_text' href="{% url 'polls:register'  %}">&nbsp; Don't have an account? &nbsp;  Sign Up</a></h1>
+
+              </div>                                                         
+        </form>
+</div>
+<div class="col-lg-4"  ></div>
+
+</div>
+{% endblock %}
+</body>
+</html>
+<!--{% for field in form.visible_fields %}
+                        {{ field.label_tag }} 
+                      
+                        {{ field.errors }}
+                        <h1 class='cmax_text text-center' > {% render_field field class="form-control" placeholder=field.name %} </h1> 
+                        
+                        {{ field.help_text }}
+                     
+                    
+                    <br> 
+                {% endfor %} -->

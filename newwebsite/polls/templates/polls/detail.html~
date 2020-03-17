@@ -1,0 +1,222 @@
+{% extends 'polls/base.html' %}
+{% block title %}HomepagE{% endblock %}
+
+
+{% block body %}
+<div style="padding-top: 300px;padding-bottom: 1000px;background-image:url('https://images.pexels.com/photos/1308624/pexels-photo-1308624.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');">
+
+<br><br><br><br>
+
+
+
+<div class="container-fluid" 
+style="
+color:white;
+background-color: #262626;
+font-family:Verdana  ;
+border: 5px solid purple
+padding-top: 50px;
+padding-left: 50px;
+padding-right:50px;
+padding-bottom:500px;
+
+box-sizing: border-box;
+width: 1800px;
+border-radius: 7px;border:solid #f2f2f2 15px;
+text-transform: uppercase;
+letter-spacing: 2px;
+"
+>
+<br><br><br>
+<div style="font-family:verdana;color:orange;font-family:times roman;text-align:right;">
+	<h1 style="text-align:center;font-size:80px;letter-spacing: 2px;font-family:Verdana  ;">{{book.book_name}} </h1><br><hr>
+<br>	<h2 >Seller : {{book.seller}}</h2>
+	<h2 >Author : {{book.author}}  </h2>
+</div>
+<br><br><br>
+
+<div style="padding-left:50px;">
+		{% if book.book_image %}
+			<img src="{{ book.book_image.url }}" class="img-responsive "
+style=" 
+width:400px;height:300px;
+
+border-radius: 7px;border:solid #f2f2f2 15px;
+">
+		{% endif %}
+</div>
+
+<br><br><br><br><br><br>
+<div style="padding: 25px;margin:10px;">
+		{% if book.pdf %}
+			<a href="{{ book.pdf.url }}" class="btn btn-primary btn-warning" target="_blank"  >
+				      Download PDF
+			</a>
+		{% endif %}
+</div>
+
+		{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+
+<div><table  class="table table-striped table-bordered table-striped table-hover "
+style="
+border: 5px solid white;
+padding: 25px;
+margin: 25px;
+font-size: 30px;
+" >
+				<thead>
+		      <tr>
+		        <th>{{book.book_name}}</th>       
+		      </tr>
+		    </thead>
+			<tbody>
+			    {% for name, value in book.get_fields %}
+				
+	
+	
+    				
+			
+<tr class=class="{% cycle 'success' 'warning' %}" 
+style="
+
+background-image:url('https://images.pexels.com/photos/1308624/pexels-photo-1308624.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');
+width: 300px;
+padding: 25px;
+margin: 25px; 
+border: 5px solid white;"
+>
+		                
+<td 
+style="
+color:white;
+padding:30px;
+"
+>
+{{ name }}
+</td> 
+<td 
+style="
+color:white;
+padding:30px;
+"
+>
+{{ value }}
+</td> 
+                       
+		        	    </tr>
+
+				{% endfor %}
+				</tbody>
+</table></div>
+
+
+<br><hr>
+<br>
+<div style="font-family:verdana;color:orange;font-family:times roman;text-align:right;">
+	<h1 style="text-align:center;font-size:80px;letter-spacing: 2px;font-family:Verdana  ;">{{book.seller.name}} </h1><br><hr>
+<br>
+</div>
+<div style="padding-left:50px;">
+{% if book.seller.dp %}
+			
+			<a href="{% url 'polls:detail' book.id  %}">
+                            <img src="{{ book.seller.dp.url }}" class="img-responsive" style=" 
+width:400px;height:300px;
+
+border-radius: 7px;border:solid #f2f2f2 15px;
+">>
+                        </a>
+			{% elif athlete_in_locker_room_list %}
+				<img src="https://www.w3schools.com/images/w3schools_green.jpg" class="img-responsive">
+    				
+{% endif %}
+</div>
+
+
+<div><table  class="table table-striped table-bordered table-striped table-hover "
+style="
+border: 5px solid white;
+padding: 25px;
+margin: 25px;
+font-size: 30px;
+" >
+				<thead>
+		      <tr>
+		        <th>{{book.book_name}}</th>       
+		      </tr>
+		    </thead>
+			<tbody>
+			    {% for name, value in book.seller.get_fields %}
+				
+	
+	
+    				
+			
+<tr class=class="{% cycle 'success' 'warning' %}" 
+style="
+
+background-image:url('https://images.pexels.com/photos/1308624/pexels-photo-1308624.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');
+width: 300px;
+padding: 25px;
+margin: 25px; 
+border: 5px solid white;"
+>
+		                
+<td 
+style="
+color:white;
+padding:30px;
+"
+>
+{{ name }}
+</td> 
+<td 
+style="
+color:white;
+padding:30px;
+"
+>
+{{ value }}
+</td> 
+                       
+		        	    </tr>
+
+				{% endfor %}
+				</tbody>
+</table></div>
+
+
+
+
+</div>
+</div>
+{% endblock %}
+<!--
+{% if book %}
+    <ul>
+    {% for key in book.meta.fields %}
+	<p> {{book.key}} </p>
+    {% endfor %}.
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+
+
+<h1>{{ seller.name }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+{% if latest_seller_list %}
+    <ul>
+    {% for seller in latest_seller_list %}
+	<p>bhjbhjbhk</p>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+-->

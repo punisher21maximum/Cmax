@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<title>seller detail form</title>
+<body style="font-size:18px;font-family:algerian;padding:40px;color:purple;">
+<h1 style="font-size:40px;">ConviMax</h1>
+
+
+<h3>Seller / uploader / lender</h3>
+
+<!-- form {{ form.as_ul }} -->
+<div style="border:solid purple 5px;
+	 border-radius: 7px; margin:30px ;padding:20px;">
+<form action="/polls/detail/" method="post" >
+    {% csrf_token %}
+<div style="padding:15px;">
+    {{ form.seller_name.errors }}
+    <label for="{{ form.seller_name.id_for_label }}">Name :</label>
+    {{ form.seller_name }}
+</div>
+<div style="padding:15px;">
+    {{ form.email_id.errors }}
+    <label for="{{ form.email_id.id_for_label }}">Email :</label>
+    {{ form.email_id }}
+</div>
+<div style="padding:15px;">
+    {{ form.ph_num.errors }}
+    <label for="{{ form.ph_num.id_for_label }}">Phone No. :</label>
+    {{ form.ph_num }}
+</div>
+<div style="padding:15px;">
+    {{ form.ac_year.errors }}
+    <label for="{{ form.ac_year.id_for_label }}">Academic Year :</label>
+    {{ form.ac_year }}
+</div>
+        <div style="padding:15px;">
+        	{{ form.branch.errors }}
+		<label class="radio-inline" for="{{ form.branch.id_for_label }}">Branch :</label>
+    		{{ form.branch }}
+	</div>
+
+
+<div style="padding:15px;">
+    {{ form.address.errors }}
+    <label for="{{ form.address.id_for_label }}">Address :</label>
+    {{ form.address }}
+</div>
+<div style="padding:15px;">
+<input type="submit" value="Submit" />
+</div>
+</form>
+</div>
+
+
+
+
+</body>
+</html>
+<!--
+ac_year=forms.CharField(max_length=lenn)
+	branch=forms.CharField(max_length=lenn)	
+	address=forms.CharField(max_length=lenn)
+<form action="/action_page.php">
+
+  Enter a date before 1980-01-01:
+  <input type="date" name="bday" max="1979-12-31"><br>
+
+  Enter a date after 2000-01-01:
+  <input type="date" name="bday" min="2000-01-02"><br>
+
+  Quantity (between 1 and 5):
+  <input type="number" name="quantity" min="1" max="5"><br>
+
+  <input type="submit">
+  
+</form>
+-->

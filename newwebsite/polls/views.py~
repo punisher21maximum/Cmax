@@ -1,0 +1,368 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+# Create your views here.
+from django.http import HttpResponse
+#template,auth login
+from django.shortcuts import render,redirect
+from django.views.generic import View
+#from .forms import  UserForm
+#generic
+from django.views import generic
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from .models import Book_model,Owner_model,Etx_model,Novel_model,Ebook_model,Enotes_model
+
+from django.contrib.auth import authenticate, login, logout
+
+#start files
+#file import
+from django.views.generic import TemplateView, ListView, CreateView
+from django.core.files.storage import FileSystemStorage
+from django.urls import reverse_lazy
+#user and profile
+from django.contrib.auth.forms import UserCreationForm
+#user
+from .forms import UserRegisterForm, UserUpdateForm#, ProfileUpdateForm
+from django.contrib import messages
+#profile
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.views.generic import (
+    ListView,
+    DetailView,
+    CreateView,
+    UpdateView,
+    DeleteView
+)
+
+
+'''login'''
+
+#@login_required
+def profile(request):
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST,
+                                   request.FILES,
+                                   instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, 'Your account has been updated!')
+            return redirect('polls:profile')
+
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+	
+    return render(request,'polls/profile.html',context)
+
+
+def register(request):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, 'Account created for {username}!'  )
+            return redirect('polls:index')
+    else:
+        form = UserRegisterForm()
+    return render(request, 'polls/register_template.html', {'form': form})
+
+#end register
+
+#add owner/user form
+class OwnerCreate( CreateView):#LoginRequiredMixin,
+	model = Owner_model
+	fields =  '__all__'
+
+
+'''books'''
+#homepage,books
+class IndexView(generic.ListView):
+	template_name = 'polls/index.html'
+	context_object_name = 'latest_owner_list'
+	def get_queryset(self):
+		return User.Book_model.objects.all()
+
+#add book form
+class BookCreate(CreateView):#LoginRequiredMixin,
+    model = Book_model
+    fields =  '__all__'
+    #Set Owner
+    '''
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+        return super().form_valid(form)'''
+
+#update book form
+class BookUpdate(UpdateView):#LoginRequiredMixin,UserPassesTestMixin,
+    model = Book_model
+    fields =  '__all__'
+    '''
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
+        '''
+#book detail form
+class DetailView(generic.DetailView):
+	model = Book_model
+	template_name = 'polls/detail.html'
+#delete view
+class DeleteView(DeleteView):
+    model = Book_model
+    success_url = '/polls/'
+    template_name = 'polls/confirm_delete_book.html'
+    
+
+'''enotes'''
+#list display------------------------------------------------------
+class EnotesIndexView(generic.ListView):
+  template_name = 'polls/enotes_index.html'
+  context_object_name = 'latest_owner_list'
+  def get_queryset(self):
+    return Enotes_model.objects.all()
+#add form------------------------------------------------------
+class EnotesCreate(CreateView):
+  model = Enotes_model
+  fields =  '__all__'#template_name = model_form.html eg. enotes_form.html
+#detail view------------------------------------------------------
+class EnotesDetailView(generic.DetailView):
+  model = Enotes_model
+  template_name = 'polls/enotes_detail.html'
+
+'''ebook'''
+#list display------------------------------------------------------
+class EbookIndexView(generic.ListView):
+	template_name = 'polls/ebook_index.html'
+	context_object_name = 'latest_owner_list'
+	def get_queryset(self):
+		return Ebook_model.objects.all()
+#add form------------------------------------------------------
+class EbookCreate(CreateView):
+	model = Ebook_model
+	fields =  '__all__'#template_name = model_form.html eg. ebook_form.html
+#detail view------------------------------------------------------
+class EbookDetailView(generic.DetailView):
+	model = Ebook_model
+	template_name = 'polls/ebook_detail.html'
+
+
+'''novel'''
+#list display------------------------------------------------------
+class NovelIndexView(generic.ListView):
+	template_name = 'polls/novel_index.html'
+	context_object_name = 'latest_owner_list'
+	def get_queryset(self):
+		return Novel_model.objects.all()
+#add form------------------------------------------------------
+class NovelCreate(CreateView):
+	model = Novel_model
+	fields =  '__all__'#template_name = model_form.html eg. novel_form.html
+#detail view------------------------------------------------------
+class NovelDetailView(generic.DetailView):
+	model = Novel_model
+	template_name = 'polls/novel_detail.html'
+
+
+
+'''etx'''
+#etx list display------------------------------------------------------
+class EtxIndexView(generic.ListView):
+	template_name = 'polls/etx_index.html'
+	context_object_name = 'latest_owner_list'
+	def get_queryset(self):
+		return Etx_model.objects.all()
+#add etx form------------------------------------------------------
+class EtxCreate(CreateView):
+	model = Etx_model
+	fields =  '__all__'
+#etx detail view------------------------------------------------------
+class EtxDetailView(generic.DetailView):
+	model = Etx_model
+	template_name = 'polls/etx_detail.html'
+
+
+
+#upload
+def upload(request):
+    context = {}
+    if request.method == 'POST':
+        uploaded_file = request.FILES['document']
+        fs = FileSystemStorage()
+        name = fs.save(uploaded_file.name, uploaded_file)
+        context['url'] = fs.url(name)
+    return render(request, 'upload.html', context)
+#end files
+
+
+'''
+def index(request):	
+	latest_question_list = Question.objects.order_by('-pub_date')[:5] 
+	latest_owner_list = Owner.objects.all()
+	context = {	
+	'latest_owner_list' : latest_owner_list ,'latest_question_list': latest_question_list
+	}
+	return render(request, 'polls/index.html', context)
+
+def index(request):
+	
+	latest_book_list = Book.objects.all()
+	context = {	
+	'latest_book_list' : latest_book_list 
+	}
+	return render(request, 'polls/index.html', context)
+
+
+# Leave the rest of the views (detail, results, vote) unchanged
+#tu3
+
+from django.shortcuts import get_object_or_404, render
+
+#from .models import Question,Owner
+# ...
+
+def detail(request, question_id):
+   
+    question = get_object_or_404(Question, pk=question_id)
+    return render(request, 'polls/detail.html', {'question': question})#
+
+def detail(request, book_id):  
+    book = get_object_or_404(Book, pk=book_id)
+    return render(request, 'polls/detail.html', {'book':book})#
+'''
+
+
+
+'''
+#forms view
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
+
+from .forms import NameForm
+
+def get_name(request,owner_form):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = NameForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return HttpResponseRedirect('/thanks/')
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = NameForm()
+
+    return render(request, 'polls/name.html', {'form': form})
+
+#endform view
+#logsin view
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
+
+from .logsin import LogsinForm
+
+def log(request,logsin_form):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = LogsinForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return HttpResponseRedirect('/thanks/')
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = LogsinForm()
+
+    return render(request, 'polls/logsin.html', {'form': form})
+#endform view
+'''
+from django.shortcuts import get_object_or_404, render
+from django.http import HttpResponseRedirect, HttpResponse
+from django.urls import reverse
+
+#start book form view
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
+
+from .bookform import fun_book_form   #func from .py file with form.fields
+
+def get_book_details(request,book_form):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = fun_book_form(request.POST)#func
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return HttpResponseRedirect('/polls/index/')
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = fun_book_form()
+
+    return render(request, 'polls/book_form.html', {'form': form})
+
+#end book form view
+#start fav
+'''
+def favourite(request, album_id):
+	album=get_object_or_404(Album, pk=album_id)
+	try:
+		selected_song = album.song_set.get(pk=request.POST['song'])
+	except ( KeyError, Song.DoesNotExist):
+		return render(request,'music/detail.html', {
+			'album':album,
+			'error_message':"you did not select a song",
+		})
+	else:
+		selected_song.is_favourite = True
+		selected_song.save()
+		return render(request, 'music/detail.html', {'album':album})
+#end fav'''
+
+def results(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    owner = get_object_or_404(Owner, pk=owner_id)
+    return render(request, 'polls/results.html', {'question': question,'owner':owner})
+
+def vote(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    try:
+        selected_choice = question.choice_set.get(pk=request.POST['choice'])
+    except (KeyError, Choice.DoesNotExist):
+        # Redisplay the question voting form.
+        return render(request, 'polls/detail.html', {
+            'question': question,
+            'error_message': "You didn't select a choice.",
+        })
+    else:
+        selected_choice.votes += 1
+        selected_choice.save()
+        # Always return an HttpResponseRedirect after successfully dealing
+        # with POST data. This prevents data from being posted twice if a
+        # user hits the Back button.
+        return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+
+
+
+
+

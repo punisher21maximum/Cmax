@@ -1,0 +1,182 @@
+{% load static %}
+
+<!DOCTYPE html>
+<head>
+<!-- my css -->
+<link rel="stylesheet" type="text/css" href="{% static 'polls/css/style.css' %}" />
+<!-- b4 min.css --><!-- b4 min.js-->
+<link rel="stylesheet" type="text/css"  href="{% static 'polls/bootstrap/css/bootstrap.min.css' %}"/>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"   ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"   ></script>
+<script   src="{% static 'polls/bootstrap/js/bootstrap.min.js' %}"></script>
+
+
+
+<title>{% block title %}ConviMax{% endblock %}</title>
+
+
+<style>
+.font_size
+{
+  font-size: 1000px;
+}
+.bgg
+{
+        font-family:Verdana  ;
+              
+        
+        
+        width: 100%;
+       
+        text-transform: capitalize;letter-spacing: 2px;
+
+        
+
+        -webkit-box-shadow: 3px 1px 22px 18px rgba(0,0,0,0.75);
+        -moz-box-shadow: 3px 1px 22px 18px rgba(0,0,0,0.75);
+        box-shadow: 3px 1px 22px 18px rgba(0,0,0,0.75);
+}
+</style>
+<!-- <img src="{% static "polls/images/maxw.png" %}"  width="70%" height="40%" alt=""> -->
+</head>
+<body>
+<header class="site-header"> 
+
+<nav class="navbar navbar-expand  navbar-dark flex-column flex-md-row bd-navbar  fixed-top" 
+  style="padding-left:40px;   font-family:monospace;background-color:#563d7c; ">
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="nav navbar-nav mr-auto"  style="font-size:60px;">    
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        <!--logo - link for index page -->&nbsp;&nbsp;
+          <a class="nav-item nav-link active navbar_item" href="{% url 'polls:index' %}">
+            {{"Home"|upper}}</a> &nbsp;&nbsp;
+          <a class="nav-item nav-link navbar_item" href="{% url 'polls:ebook_index'  %}">
+            {{"Ebook"|upper}}</a>&nbsp;&nbsp;
+          <a class="nav-item nav-link navbar_item" href="{% url 'polls:enotes_index'  %}">
+            {{"Enotes"|upper}}</a> &nbsp;&nbsp;
+          <a class="nav-item nav-link navbar_item" href="{% url 'polls:novel_index'  %}">
+            {{"Novel"|upper}}</a> &nbsp;&nbsp;
+          <a class="nav-item nav-link navbar_item" href="{% url 'polls:etx_index' %}">
+            {{"Etx"|upper}}</a>  &nbsp;&nbsp;
+
+                            
+                   
+<div class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >{{"+ADD"|upper}}</a> 
+
+  <div class="dropdown-menu text-center text-light" aria-labelledby="navbarDropdownMenuLink" style="font-size:30px;background-color:#6b4c9a;  " >
+      <a class="dropdown-item" href="{% url 'polls:enotes_index'  %}">
+          {{"Enotes"|upper}}</a> 
+      <a class="dropdown-item" href="{% url 'polls:novel_index'  %}">
+          {{"Novel"|upper}}</a> 
+      <a class="dropdown-item" href="{% url 'polls:etx_index' %}">
+          {{"Etx"|upper}}</a> 
+  </div>
+</div>
+&nbsp;&nbsp;
+                                                
+                                                  
+
+
+ 
+{% if user.is_authenticated %}                    
+<a class="nav-item nav-link" style="float:right" href="{% url 'polls:owner_profile' %}">{{"profile"|upper}}</a>&nbsp;&nbsp;
+<a class="nav-item nav-link" style="float:right" href="{% url 'polls:logout' %}" style="text-align: right">{{"logout"|upper}}</a>
+{% else %}
+<a class="nav-item nav-link" style="float:right" href="{% url 'polls:login' %}">{{"login"|upper}}</a>&nbsp;&nbsp;
+<a class="nav-item nav-link" style="float:right" href="{% url 'polls:register' %}">{{"register"|upper}}</a>
+{% endif %} 
+ 
+
+
+        </div>
+    </div>
+</nav>
+
+
+<br><br> <br> 
+<br>
+
+</header>
+
+    
+
+
+<!-- 4 sections nav -->
+
+ 
+
+
+</div>
+
+
+{% block body %}
+
+
+{% endblock %}
+</body>
+
+<!--
+
+ <div class="row " style="height:400px;
+  ">
+
+       
+          <div class="col-sm-3" >
+                <div class="thumbnail " >
+                <a href="{% url 'polls:etx_index'  %}" class="thumbnail" >
+                <img src="{% static "polls/images/etx.png" %}" alt="..." style="height:300px;width:100%;">
+                </a>     
+                <div class="caption">    
+                </div>
+          </div>
+
+          </div>
+      
+          <div class="col-sm-3">
+                <div class="thumbnail imagez" >
+                <a href="{% url 'polls:novel_index'  %}" class="thumbnail">
+                <img src="{% static "polls/images/novel.png" %}" alt="..." style="height:300px;width:100%;">
+                </a>        
+                <div class="caption">
+            
+                </div>
+          </div>
+
+          </div>
+       
+          <div class="col-sm-3">
+                <div class="thumbnail imagez" >
+                <a href="{% url 'polls:enotes_index'  %}" class="thumbnail">
+                <img   src="{% static "polls/images/enotes.png" %}"  alt="..." style="height:300px;width:100%;">
+                </a>        
+                <div class="caption">
+                
+                </div>
+          </div>
+
+          </div>
+
+          <div class="col-sm-3">
+                <div class="thumbnail imagez " >
+                <a href="{% url 'polls:ebook_index'  %}" class="thumbnail">
+                <img   src="{% static "polls/images/ebook.png" %}"  alt="..." style="height:300px;width:100%;">
+                </a>        
+                <div class="caption">
+            
+                </div>
+          </div>
+
+  </div>
+  -->
+  <!--
+  <script type="text/javascript" src="{% static 'polls/bootstrap/js/jquery.min.js' %}"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+background-color:  #b20066;
+-->

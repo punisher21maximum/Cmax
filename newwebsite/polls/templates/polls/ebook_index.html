@@ -1,0 +1,141 @@
+{% extends 'polls/base.html' %}
+{% load static %}
+{% load bootstrap %}
+{% load crispy_forms_tags %}
+
+<!--link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}"-->
+<!--border: 5px solid purple ; box-sizing: border-box; border-radius: 7px;-->
+{% block body %}
+<!--fullpage-->
+<div class=" " style='padding-top: 10px;   padding-bottom: 1000px;'>
+
+    <!-- search bar -->
+    <div class="row" style="padding-top: 50px;   ">
+        <div class="col-lg-12 " >  
+            <!-- filters -->
+                <div class="filter_index_engg container-fluid" 
+                    style="width: 98%;color:#7754ab;padding: 5px 15px 5px 15px; "> 
+                        <div style="font-size:30px;">
+                        <form method="GET">
+                            <div class="form-row">
+                                      <div class="form-group col-md-1">
+                                  
+                                      </div>
+                                      <div class="form-group col-md-2">
+                                      {{ filter.form.ebook_branch|as_crispy_field }}
+                                      {{ filter.form.ebook_edition|as_crispy_field }} 
+                                      </div>
+<div class="form-group col-md-2"> 
+   {{ filter.form.ebook_sub|as_crispy_field }}
+  
+</div>
+                                    <div class="form-group col-md-2">
+                                      {{ filter.form.ebook_year|as_crispy_field }}
+                                     
+                                    </div>
+<div class="form-group col-md-3"> 
+   {{ filter.form.ebook_name|as_crispy_field }}
+   {{ filter.form.ebook_author|as_crispy_field }}
+</div>
+                                    
+
+<div class="form-group col-md-2" style='padding:17px;'>
+  <button type="submit" class="text-center button_engg btn-block  ">
+    <p class="text-center " style="font-size: 120%; ">search</p>
+  </button> 
+</div>
+                                        <div class="form-group col-md-1">    
+
+                                        </div>  
+          
+                            </div>  
+                        </form> 
+                        </div>   
+                </div > 
+            <!-- filters end--> 
+        </div >   
+    </div > 
+    <!-- search bar end -->
+
+    <!-- left side bar + (middle + paginator) + right side bar-->
+    <div class="row" style="padding-top: 50px;   ">
+
+        <!-- left side bar  -->
+        <div class="col-lg-2 " >  
+                {% include "polls/side_bar_all.html" %}  
+        </div >  
+        <!-- left side bar  end-->              
+        <br><br>
+        <!--  (middle + paginator) -->
+        <div class="col-lg-8 index_middle_bg" style="padding: 10px 30px;"> 
+
+            <!--row start-->
+            <div class="row" style="font-size:35px;"> 
+            <!--middle start-->                                  
+            {% if object_list %}
+                {% for ebook_model in  filter.qs %}
+                    <div class="card " style="width: 33.333%;padding:60px;padding-top:30px;">
+                            {% if ebook_model.ebook_image %}
+                                <a href="{% url 'polls:ebook_detail' ebook_model.id  %}">
+            <img class="card-img-top img-responsive" src="{{ ebook_model.ebook_image.url }}"   alt="Card image cap"
+                                style=" padding: 80px; height:400px;">
+                                </a>
+                            {% endif %}
+                        <div>
+                            <h5 style="color:#533b78" >{{ebook_model.owner.username }}</h5>
+
+                            <b style="color:#533b78;font:15px;">{{ebook_model.ebook_name }}</b>
+                            <i style="color: #241933 ;font-size:20px;">{{ebook_model.ebook_author }}</i><hr>
+
+                            <h2 style="color:#8465b3;"> 
+                                Branch :{{ ebook_model.ebook_branch }} </br>
+                                Subject : {{ebook_model.ebook_sub }}    </br>
+                                Year : {{ebook_model.ebook_year }}      </br><hr>
+                                
+                                {% if ebook_model.ebook_pdf or ebook_model.ebook_drive_url %}
+                                <b style="color:#6b4c9a;" >source :</b>
+                                {% if ebook_model.ebook_pdf  %}
+                                <a href="{{ ebook_model.ebook_pdf.url }}" class="text-center button_engg b btn-lg"   target="_blank"  >
+                                        pdf 
+                                </a>    
+                                {% endif %}
+                                {% if ebook_model.ebook_drive_url %}&nbsp;
+                                <a href="{{ ebook_model.ebook_drive_url }}" class="text-center button_engg b btn-lg"   target="_blank"  >
+                                        link 
+                                </a>    
+                                {% endif %}
+                                {% endif %}
+                            </h2>
+                            </br>
+                                                                                        
+                            
+                            <a href="{% url 'polls:ebook_detail' ebook_model.id  %}" 
+                            class="text-center button_engg btn-block btn-lg" role="button"><b>MORE</b></a>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h1 class=" col-sm-12 detail_heading" style="width: 100%";>  NO BOOKS </h1> 
+            {% endif %}         
+            <!--middle end-->
+            <!--paginator --> 
+            <div class="col-lg-12  " >            
+              {% include "polls/side_bar_paginator.html" %}                 
+            </div>
+            <!--paginator end-->  
+                                    
+            </div>
+            <!-- row  end-->
+
+        </div > 
+        <!-- (middle + paginator)  end-->
+    <!-- right side bar -->
+    <div class="col-lg-2  " >  
+            {% include "polls/side_bar_all.html" %} 
+    </div >
+    <!-- right side bar end -->  
+
+    </div>
+</div>
+{% endblock %}
+

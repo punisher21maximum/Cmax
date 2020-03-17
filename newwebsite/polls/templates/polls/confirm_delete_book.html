@@ -1,0 +1,119 @@
+{% extends 'polls/base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+{% block title %}Delete{% endblock %}
+<style>
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button1 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #4CAF50;
+}
+
+.button1:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.button2 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #008CBA;
+}
+
+.button2:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+
+</style>
+
+</head>
+<body>
+{% block body %}
+<div style="padding-top: 300px;padding-bottom: 1000px;background-image:url('https://images.pexels.com/photos/1308624/pexels-photo-1308624.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');">
+
+<div class="container-fluid" 
+style="
+color:#004d00;
+background-color: #e6e6e6;
+font-family:Verdana  ;
+border: 5px solid purple
+padding-top: 50px;
+box-sizing: border-box;
+width: 1500px;
+border-radius: 7px;border:solid #f2f2f2 15px;
+
+text-transform: capitalize;letter-spacing: 2px;
+">
+
+     <div class="row" style="font-size: 20px;  ">
+
+        <div class="col-sm-12 col-md-7" >
+            <div class="panel panel-default" >
+                <div class="panel-body">
+                    <h3 style="text-align: center;border-radius: 3px;border:solid #f2f2f2 5px;text-decoration: underline;margin:50px ; font-size: 50px;" 
+			> Are you sure you want to delete ?  </h3>
+ 
+<div>
+
+
+
+<form  class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <!--input type="submit" value="Submit" /-->
+	<div class="form-group" style="padding: 30px;">
+					<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-danger  ">Yes, Delete</button>
+                    <a class="btn  btn-success"  href="{% url 'polls:index'   %}">NO, Cancel</a>
+					</div>
+	 </div>
+</form>
+
+</div>
+ </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-5">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>What is ConviMax?</h3>
+                    <p>ConviMax is a website that allows you to upload or download or contact a owner.</p>
+                    <h3>How do you upload or sell</h3>
+                    <p>First, create a your id . Once id is created upload or download or contact owner.</p>
+                    <h3>What are some image logo best practices?</h3>
+                    <ul>
+                        <li>Have a resolution of 512x512</li>
+                        <li>Use common image formats such as .JPG, .GIF, or .PNG</li>
+                        <li>Remain under the 2MB limit.</li>
+                        <li>Square images look best</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</div>
+
+{% endblock %}

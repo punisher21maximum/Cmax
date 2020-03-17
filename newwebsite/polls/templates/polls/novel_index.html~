@@ -1,0 +1,201 @@
+{% extends 'polls/base.html' %}
+{% load static %}
+
+
+{% block body %}
+
+
+
+<div style="padding-top: 300px;padding-bottom: 1000px;background-image:url('https://images.pexels.com/photos/1308624/pexels-photo-1308624.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500') ; ">
+
+
+<div class="row">
+  <div class="col-xs-6 col-md-3">
+    <a href="{% url 'polls:index'  %}" class="thumbnail">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtQLoQqEZB4YOgVMin30mnuNzkeONmahMbAZ1CpkWZe6TWY1JzUA" alt="..." style="height: 400px;">
+    </a>
+  </div>
+  ..https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSE94M9trMHWisQ820t5g7Xgu5now1VcO_8bV297IoMIDf_TSr5Og
+</div>
+
+
+
+<div class="albums-container container-fluid"
+
+style="
+color:orange;
+background-color: #e6e6e6;
+font-color:orange;
+font-family:Verdana  ;
+border: 5px solid purple
+padding-top: 50px;
+box-sizing: border-box;
+width: 2000px;
+border-radius: 7px;
+
+background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTn8KyPqYWVi8FTYurNwxMU0HkuI2N7fdhJ3qU80yTXFCXa5cPsxA');
+text-transform: capitalize;letter-spacing: 2px;
+"
+>
+
+
+<!--border:solid #595959  15px;-->
+    <!-- Albums https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHFuTB1LwJXyS9pZsQ5RU9XLjGcDSyYssNhJoyPHco_NgfkYgsfQ
+https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTn8KyPqYWVi8FTYurNwxMU0HkuI2N7fdhJ3qU80yTXFCXa5cPsxA blue blurr
+-->
+    <div class="row" style="padding-top: 150px;padding-left: 50px;padding-right: 50px;">
+
+        <div class="col-md-12" >
+            
+        </div >
+        {% if object_list %}
+            {% for novel in  latest_seller_list %}
+                <div class="col-lg-4 ">
+                    <div class="thumbnail" style="background-color:white ; ">
+			{% if novel.item_image %}
+			
+			<a href="{% url 'polls:novel_detail' novel.id  %}">
+                            <img src="{{ novel.item_image.url }}" class="img-responsive" style=" padding: 35px;height: 400px;">
+                        </a>
+			{% elif athlete_in_locker_room_list %}
+				<img src="https://www.w3schools.com/images/w3schools_green.jpg" class="img-responsive">
+    				
+			{% endif %}
+                        
+                        <div class="caption" style="font-family:verdana;font-size:50px;color:#0000e6;">
+                            <h1>Item Name : {{novel.item_name }}</h1><hr><hr>
+			
+                            <h2> Item Branch  :{{ novel.item_branch }}</h2>
+				<h2>Item Subject : {{novel.item_subject }}</h2>
+				<h2>Item Academic Year : {{novel.item_year }}</h2>
+			    <h2>Item Sell Price : {{novel.sell_price }}</h2>
+			
+
+                            <!-- View Details -->
+                            <a href="{% url 'polls:novel_detail' novel.id  %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+
+                            <!-- Delete Album -->
+                            <form action="{% url 'polls:novel_detail' novel.id %}" method="post" style="display: inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="album_id" value="{{ album.id }}" />
+                                <button type="submit" class="btn btn-default btn-sm">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </form>
+
+                            <!-- Favorite Album -->
+                            <a href="{% url 'polls:novel_detail' novel.id %}" class="btn btn-default btn-sm btn-favorite" role="button">
+                                <span class="glyphicon glyphicon-star {% if album.is_favorite %}active{% endif %}"></span>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+                {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
+            {% endfor %}
+        {% else %}
+            <div class="col-sm-12">
+                <br>
+                <a href="{% url 'polls:novel_detail' novel.id %}">
+                    <button type="button" class="btn btn-success">
+                        <span class="glyphicon glyphicon-plus"></span>&nbsp; Add an Album
+                    </button>
+                </a>
+            </div>
+        {% endif %}
+    </div>
+
+   
+
+</div>
+</div>
+{% endblock %}
+
+{% block body3 %}
+	<img src="{% static 'polls/images/punisher.jpg' %}" alt="Flowers in Chania">
+	<h1> welcome to the book exchange platform </h1>
+
+	{% if object_list %}
+	<div class="container" >
+	<table  class="table table-striped table-bordered table-striped table-hover " >
+			<thead>
+              <tr>
+                <th>BookName</th>       
+              </tr>
+            </thead>
+	        <tbody>
+		    {% for novel in  latest_seller_list %}
+		        
+				
+				<tr class=class="{% cycle 'success' 'warning' %}" style="background-color: lightgrey;
+  width: 300px;
+  border: 25px solid green;
+  padding: 25px;
+  margin: 25px; border: 5px solid gray;">
+                        
+                            <td><a href="{% url 'polls:novel_detail' novel.id  %}" >
+                                            {{ novel.item_name }}
+                                </a>
+                            </td>                        
+                	    </tr>
+
+			{% endfor %}
+			</tbody>
+	</table> 
+	</div>  
+	{% else %}
+	    <p>No polls are available.</p>
+	{% endif %}
+{% endblock %}
+
+
+{% block body2 %}
+
+<img src="{% static 'polls/images/punisher.jpg' %}" alt="Flowers in Chania">
+<h1> welcome to the book exchange platform </h1>
+{% if object_list %}
+    <ul>
+    {% for book in  latest_seller_list %}
+        
+		
+<div class="container">
+<a href="{% url 'polls:novel_detail' novel.id  %}" >
+		{{ book.book_name }}
+		</a>
+  <div class="desc">Add a description of the image here</div>
+</div>
+
+{% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+<!--
+<h1> welcome to the book exchange platform </h1>
+         
+{% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+        <li><a href="{% url 'polls:detail' question.id %}" style="color:blue;font-size:500%;font-family:algerian;background-color:powderblue;">{{ question.question_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}        
+    <p>No polls are available.</p>
+{% endif %}
+
+-->
+
+
+

@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>Login convimax</title>
+<!--link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" /-->
+<link rel="stylesheet" type="text/css"  href="{% static 'polls/bootstrap/css/bootstrap.min.css' %}"/>
+
+<link rel="stylesheet" type="text/css"  href="{% static 'polls/css/global.css' %}">
+
+</head>
+<body>
+{% block body %}
+<div class="container-fluid bg" style="margin-bottom:100px;">
+  <div class="row" >
+      <div class="col-md-4 col-sm-4 col-xs-12"></div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+
+
+ <form  class="form-container" role="form" action="" method="post" enctype="multipart/form-data"
+                style="padding-top:30px;padding-bottom:20px;font-size:50px;color:black;">
+
+
+                    <h3 style="text-align: center;margin:30px ; font-size: 50px;">ConviMax</h3><hr>
+                    <div >
+                      {% if seller.is_authenticated %}
+                        
+                        <h1><a class="nav-item nav-link" href="{% url 'polls:logout' %}">Logout</a></h1>
+                      {% else %}
+                        <h3><a  href="{% url 'polls:login' %}">Already a user , login,</a></h3><hr>
+                        <h3><a  href="{% url 'polls:register' %}">New user,  Register</a></h3>
+                      {% endif %}
+                    </div>
+
+
+
+        
+</form>
+
+         </div>  
+      <div class="col-md-4 col-sm-4 col-xs-12"></div>
+  </div>
+</div>
+
+
+{% endblock %}
+

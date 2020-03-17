@@ -1,0 +1,260 @@
+{% extends 'polls/base.html' %}
+{% block title %}HomepagE{% endblock %}
+<!DOCTYPE html>
+
+{% block body %}
+<div class="bgg" style="padding-top: 30px;padding-bottom: 1000px;
+  ">
+  	<!-- all three sections -->
+  	<div class="row" style="padding-top: 50px;   ">
+
+
+  		<!-- filters -->
+        <div class="col-lg-1" >  
+		                 <!-- filters -->
+
+					    <div class="  " >  
+					            <div class=" container-fluid filter_index text-center"
+					                style="width: 90%;color:#8465b3;" > 
+
+					            <h1 style="color:#6b4c9a;"> GO TO </h1><hr>
+					                <a class="nav-link flex-column active " href="#item">
+					                <button type="button" class="text-center button_engg btn-block btn-lg">{{"item "|upper}}</button>
+					              </a><br>
+
+					              <a class="nav-link flex-column active " href="#price">
+					                <button type="button" class="text-center button_engg btn-block btn-lg">{{"price"|upper}}</button>
+					              </a><br>
+
+					              <a class="nav-link flex-column active" href="#owner">
+					                <button type="button" class="text-center button_engg btn-block btn-lg">{{"owner"|upper}}</button>
+					                </a><br>
+
+					            </div > 
+					    </div >  
+		        <!-- filters end--> 
+        </div >  
+        <!-- filters end--> 
+
+        <!-- middle--> 
+
+        <div class="col-lg-9 " style='-webkit-box-shadow: 0px 0px 17px -8px rgba(132,101,179,1);
+-moz-box-shadow: 0px 0px 17px -8px rgba(132,101,179,1);
+box-shadow: 0px 0px 17px -8px rgba(132,101,179,1);'> 
+
+			<div class="container-fluid detail_middle_bg" >
+				{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+				
+			<div >
+			<div style="text-align:right;">
+				<h1 class="detail_heading"  >
+					{{book_model.book_name}} </h1><hr><br>
+				<h2 class="c3">Seller : {{book_model.owner.username}}</h2>
+				<h2 class="c3">Author : {{book_model.author}}  </h2>
+			</div>
+			<br><br><br>
+			<div class="row">
+						
+				<!-- book image large -->
+				<div class="col-lg-6  " > 
+					<div style="padding-left:80px;" >
+					{% if book_model.book_image %}
+						<img src="{{ book_model.book_image.url }}" class="img-responsive "
+						style=" height:650px;  ">
+					{% endif %}
+					<!-- download link -->
+					<div>
+					{% if book_model.pdf %}<br><br>
+					<a href="{{ book_model.pdf.url }}" target="_blank" >
+	                	<button type="button" class="text-center   button_engg  btn-lg ">
+	                		<h1><b>Download</b></h1>
+	                	</button>
+	              	</a> 
+					{% endif %}
+					</div>
+					<!-- download link end-->			
+					</div>
+					<!-- book image large  end-->
+				</div>
+				<br><br><br>
+				<div class="col-lg-6 " > 
+				</div>
+			</div>
+			<!-- row ends-->
+		    <div><br><br>	
+			<!-- table book info --> 
+				<div id='item' ><table  class="table table-striped table-bordered  table-hover "
+				style="border: 5px solid white; padding: 50px; font-size: 30px;" >
+							<thead >
+							        <tr>
+							        	<th style="color:#8465b3; padding:30px;" >{{book_model.book_name}}</th>
+							        </tr>
+							       
+						    </thead>
+				<tbody > 
+				{% for name, value in book_model.get_fields %}																		    												
+				<tr class="{% cycle 'success' 'warning' %}" 
+				style="	border: 5px solid white;color:#533b78;"
+				>
+						{% if  name == 'book_branch'   %}<td style="	padding:30px;"><b>Branch</b></td> 
+						<td style=" padding:30px;"><b>{{ value }}</b></td> 
+						{% endif %} 
+						{% if   name == 'book_year'  %}<td style="	padding:30px;"><b>Year</b></td> 
+						<td style=" padding:30px;"><b>{{ value }}</b></td> 
+						{% endif %}
+						{% if   name == 'book_sub'  %}<td style="	padding:30px;"><b>Subject</b></td> 
+						<td style=" padding:30px;"><b>{{ value }}</b></td> 
+						{% endif %}
+						{% if  name == 'author'  %}<td style="	padding:30px;"><b>Author</b></td> 
+						<td style=" padding:30px;"><b>{{ value }}</b></td> 
+						{% endif %}
+					                       
+				</tr>
+				{% endfor %} 
+				</tbody>
+				</table>
+				</div>
+				<!-- table book info end --> 
+
+				<br><br>
+				<!-- table book price --> 
+				
+				<div id='price' ><table  class="table table-striped table-bordered  table-hover "
+				style="border: 5px solid white; padding: 50px;font-size: 30px;" >
+							<thead>
+							        <tr style="color:#8465b3; padding:30px;"><th >Sell And Rent</th>
+							        <th >Rs </th></tr>
+						    </thead>
+				<tbody > 
+				 {% for name, value in book_model.get_fields %}																		    												
+				<tr class="{% cycle 'success' 'warning' %}" 
+				style="	border: 5px solid white;color:#533b78;"
+				>
+					{% if  name == 'sell_price'   %}<td style="	padding:30px;"><b> price</b></td> 
+					<td style=" padding:30px;"><b>{{ value }}</b></td> 
+					{% endif %} 
+					{% if   name == 'rent_price_per_day'  %}<td style="	padding:30px;"><b>  per day</b></td> 
+					<td style=" padding:30px;"><b>{{ value }}</b></td> 
+					{% endif %}
+					{% if   name == 'rent_price_per_week'  %}<td style="	padding:30px;"><b>  per week</b></td> 
+					<td style=" padding:30px;"><b>{{ value }}</b></td> 
+					{% endif %}
+					{% if   name == 'rent_price_per_month'  %}<td style="	padding:30px;"><b> per month</b></td> 
+					<td style=" padding:30px;"><b>{{ value }}</b></td> 
+					{% endif %}
+				</tr>
+				 {% endfor %} 
+				</tbody>
+				</table>
+				</div>
+				<!-- table book price end --> 
+
+
+				<br><hr><br>
+				<div  id='owner'>
+					<h1 style="text-align:center;font-size:80px;letter-spacing: 2px; color:#8465b3;  ;">
+						{{book_model.owner.username}} </h1><br><hr>
+				<br>
+				</div>
+				<!-- profile foro -->
+				<div style="padding-left:50px;">
+					{% if book_model.owner.owner_model.dp %}
+					<a href="{% url 'polls:detail' book_model.id  %}">
+					<img src="{{ book_model.owner.owner_model.dp.url }}" class="img-responsive" style=" 
+					width:400px;height:300px;border-radius: 7px;border:solid #f2f2f2 15px;">
+					</a>
+					{% endif %}
+				</div>
+				<!-- profile foto end -->
+				</br></br>
+				<!-- profile table -->
+				
+				<div>
+					<table  class="table table-striped table-bordered table-striped table-hover "
+					style="font-size: 30px;" >
+						<!--thead><tr><th>{{book_model.book_name}}</th></tr></thead-->
+					<tbody>
+					{% for name, value in book_model.owner.owner_model.get_fields %}
+					{% if name == "branch" or name == "ac_year" or name == "address"  %}
+					<tr class="{% cycle 'success' 'warning' %}" 
+					style="border: 5px solid white; color:#533b78;">
+						<td style="padding:30px;"><b>{{ name }}</b></td> 
+						<td style="padding:30px;"><b>{{ value }}</b></td> 
+					</tr>
+					{% endif %}
+					{% endfor %}
+					</tbody>
+					</table>
+				</div>
+				<!-- profile table -->
+				<!-- row end-->
+
+				<br><br><br>
+				<hr>
+
+				{% if object.owner == user %}
+				<h2 id='del' style="color:red;padding:20px;"><b>As you are the owner of this post you can update and delete your posts here.</b></h2>
+
+				          <div style="padding:30px;">
+				            <span><a style="margin:30px;"class="btn btn-outline-primary btn-lg mt-1 mb-1" 
+				            	href="{% url 'polls:book_update' object.id %}">Update</a></span>
+				            <span>&nbsp;&nbsp;&nbsp;
+				            <a class="btn btn-outline-danger btn-lg mt-1 mb-1" 
+				            href="{% url 'polls:book_delete' object.id %}">Delete</a></span>
+				          </div>
+				{% endif %}
+				</div>
+				</div>
+
+
+			</div>
+			</div>
+			<!-- middle end--> 
+			<!-- filters -->
+        		<div class="col-lg-2" >  
+                   {% include "polls/side_bar_all.html" %}
+	        	</div >  
+	        <!-- filters end-->
+	</div>		
+	<!-- all three sections end-->
+	
+</div>
+
+{% endblock %}
+</html>
+
+
+
+
+
+
+
+
+<!--
+{% if book %}
+    <ul>
+    {% for key in book.meta.fields %}
+	<p> {{book.key}} </p>
+    {% endfor %}.
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+
+
+<h1>{{ seller.name }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+{% if latest_seller_list %}
+    <ul>
+    {% for seller in latest_seller_list %}
+	<p>bhjbhjbhk</p>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+-->

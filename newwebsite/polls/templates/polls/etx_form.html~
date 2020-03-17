@@ -1,0 +1,76 @@
+{% extends 'polls/base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+{% block title %}Add a New Book{% endblock %}
+</head>
+<body>
+{% block body %}
+<div style="padding-top: 300px;padding-bottom: 1000px;background-image:url('https://images.pexels.com/photos/1308624/pexels-photo-1308624.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');">
+
+<div class="container-fluid" 
+style="
+color:#004d00;
+background-color: #e6e6e6;
+font-family:Verdana  ;
+border: 5px solid purple
+padding-top: 50px;
+box-sizing: border-box;
+width: 1500px;
+border-radius: 7px;border:solid #f2f2f2 15px;
+
+text-transform: capitalize;letter-spacing: 2px;
+">
+
+     <div class="row" style="font-size: 20px;  ">
+
+        <div class="col-sm-12 col-md-7" >
+            <div class="panel panel-default" ">
+                <div class="panel-body">
+                    <h3 style="text-align: center;border-radius: 3px;border:solid #f2f2f2 5px;text-decoration: underline;
+ margin:50px ; font-size: 50px;" 
+			>ADD A NEW ITEM </h3>
+ 
+<div>
+
+<form  class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <!--input type="submit" value="Submit" /-->
+	div class="form-group" style="padding: 30px;">
+					<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-success btn-block ">Submit</button>
+					</div>
+	 </div>
+</form>
+
+</div>
+ </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-5">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>What is ConviMax?</h3>
+                    <p>ConviMax is a website that allows you to upload or download or contact a seller.</p>
+                    <h3>How do you upload or sell</h3>
+                    <p>First, create a your id . Once id is created upload or download or contact seller.</p>
+                    <h3>What are some image logo best practices?</h3>
+                    <ul>
+                        <li>Have a resolution of 512x512</li>
+                        <li>Use common image formats such as .JPG, .GIF, or .PNG</li>
+                        <li>Remain under the 2MB limit.</li>
+                        <li>Square images look best</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</div>
+
+{% endblock %}

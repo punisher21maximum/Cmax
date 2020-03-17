@@ -1,0 +1,193 @@
+{% extends 'polls/base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+{% block title %}Add a New Book{% endblock %}
+</head>
+<body>
+{% block body %}
+
+
+
+<div style="padding-top: 300px;padding-bottom: 1000px;background-image:url('https://images.pexels.com/photos/1308624/pexels-photo-1308624.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');">
+
+<div class="container-fluid" 
+style="
+color:#004d00;
+background-color: #e6e6e6;
+font-family:Verdana  ;
+border: 5px solid purple
+padding-top: 50px;
+box-sizing: border-box;
+width: 1500px;
+border-radius: 7px;border:solid #f2f2f2 15px;
+
+text-transform: capitalize;letter-spacing: 2px;
+">
+
+     <div class="row" style="font-size: 20px;  ">
+
+        <div class="col-sm-12 col-md-7" >
+            <div class="panel panel-default" ">
+                <div class="panel-body">
+                    <h3 style="text-align: center;border-radius: 3px;border:solid #f2f2f2 5px;text-decoration: underline;
+ margin:50px ; font-size: 50px;" 
+			>ADD A NEW ITEM </h3>
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+                    <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data"
+style="font-size: 20px;">
+                        {% csrf_token %}
+			<fieldset>
+    				<legend>Engg Book Form</legend><hr>
+
+                        <div class="fieldWrapper" style="  padding-top: 10px;
+  padding-right: 30px;
+  padding-bottom: 10px;
+  padding-left: 50px;">
+    			<label for="{{ form.material_name.id_for_label }}">Material name:</label>
+    			{{ form.material_name }}
+			</div>
+
+                        <div class="fieldWrapper" style="  padding-top: 10px;
+  padding-right: 30px;
+  padding-bottom: 10px;
+  padding-left: 50px;">
+    			<label for="{{ form.owner.user.id_for_label }}">Seller:</label>
+    			{{ form.owner.user }}
+			</div>
+
+                        <div class="fieldWrapper" style="  padding-top: 10px;
+  padding-right: 30px;
+  padding-bottom: 10px;
+  padding-left: 50px;">
+    			<label for="{{ form.book_name.id_for_label }} " >Book Name:</label>
+    			{{ form.book_name }} 
+			</div>
+
+                        <div class="fieldWrapper" style="  padding-top: 10px;
+  padding-right: 30px;
+  padding-bottom: 10px;
+  padding-left: 50px;">
+    			<label for="{{ form.book_image.id_for_label }}">Book Image:</label>
+    			{{ form.book_image }}
+			</div>
+
+                        <div class="fieldWrapper" style="  padding-top: 10px;
+  padding-right: 30px;
+  padding-bottom: 10px;
+  padding-left: 50px;">
+    			<label for="{{ form.pdf.id_for_label }}">Book File:</label>
+    			{{ form.pdf }}
+			</div>
+
+                        <div class="fieldWrapper" style="  padding-top: 10px;
+  padding-right: 30px;
+  padding-bottom: 10px;
+  padding-left: 50px;">
+    			<label for="{{ form.book_branch.id_for_label }}">Book for Branch:</label>
+    			{{ form.book_branch }}
+			</div>
+
+                        <div class="fieldWrapper" style="  padding-top: 10px;
+  padding-right: 30px;
+  padding-bottom: 10px;
+  padding-left: 50px;">
+    			<label for="{{ form.book_sub.id_for_label }}">Book Sub:</label>
+    			{{ form.book_sub }}
+			</div>
+
+                        <div class="fieldWrapper" style="  padding-top: 10px;
+  padding-right: 30px;
+  padding-bottom: 10px;
+  padding-left: 50px;">
+    			<label for="{{ form.book_year.id_for_label }}">Book For year:</label>
+    			{{ form.book_year }}
+			</div>
+
+                        <div class="fieldWrapper" style="  padding-top: 10px;
+  padding-right: 30px;
+  padding-bottom: 10px;
+  padding-left: 50px;">
+    			<label for="{{ form.author.id_for_label }}"><p>Author:  </p></label>
+    			{{ form.author }}
+			</div>
+
+			<div class="fieldWrapper" style="  padding-top: 10px;
+			  padding-right: 30px;
+			  padding-bottom: 10px;
+			  padding-left: 50px;">
+    			<label for="{{ form.edition.id_for_label }}"><p>Edition:  </p></label>
+    			{{ form.edition }}
+			</div>
+
+                        <div class="fieldWrapper" style="  padding-top: 10px;
+  padding-right: 30px;
+  padding-bottom: 10px;
+  padding-left: 50px;">
+    			<label for="{{ form.sell_price.id_for_label }}">Sell price:</label>
+    			{{ form.sell_price }}
+			</div>
+
+                        <div class="fieldWrapper" style="  padding-top: 10px;
+  padding-right: 30px;
+  padding-bottom: 10px;
+  padding-left: 50px;">
+    			<label for="{{ form.rent_price_per_month.id_for_label }}">Rent price per month:</label>
+    			{{ form.rent_price_per_month }}
+			</div>
+
+                        <div class="fieldWrapper" style="  padding-top: 10px;
+  padding-right: 30px;
+  padding-bottom: 10px;
+  padding-left: 50px;">
+    			<label for="{{ form.rent_price_per_week.id_for_label }}">Rent price per week:</label>
+    			{{ form.rent_price_per_week }}
+			</div>
+
+
+                        <div class="form-group" style="  padding-top: 30px;
+  padding-right: 200px;
+  padding-bottom: 50px;
+  padding-left: 50px;">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success btn-block">Submit</button>
+                            </div>
+                        </div>
+
+			<fieldset>
+			   
+                    </form>
+
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-5">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>What is ConviMax?</h3>
+                    <p>ConviMax is a website that allows you to upload or download or contact a seller.</p>
+                    <h3>How do you upload or sell</h3>
+                    <p>First, create a your id . Once id is created upload or download or contact seller.</p>
+                    <h3>What are some image logo best practices?</h3>
+                    <ul>
+                        <li>Have a resolution of 512x512</li>
+                        <li>Use common image formats such as .JPG, .GIF, or .PNG</li>
+                        <li>Remain under the 2MB limit.</li>
+                        <li>Square images look best</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</div>
+{% endblock %}
+</body>
+</html>

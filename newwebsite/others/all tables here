@@ -1,0 +1,113 @@
+//1//polls_book_model
+id        book_name   book_image  p  book_branch   book_yea  author    edition   sell_pri  rent_pri  rent_pri  owner_id    book_sub  
+--------  ----------  ----------  -  ------------  --------  --------  --------  --------  --------  --------  ----------  ----------
+1         kk          add_new_et     CS            I         kkk       2019      500       400       100       1           DS        
+2         my_book_up  add_new_en     CS            I         you are   2019      400       100       60        1           EI        
+3         hugo        Screenshot     IT            II        kash      2017      300       100       50        2           DSGT      
+4         rdsharma    add_new_no     FY            I         rdsharma  2009      400       200       100       2           AM2       
+5         BV RAMANA   bv.jpg         FY            I         BV RAMAN  2008      600       200       50        1           MATHS     
+6         KORTH       korth.jpg      CS            II        korth     2015      400       200       100       1           DBMS      
+7         htfjgjjm    download_1     ETX           III       gvdsgdgh  2019      23        2332      123       6           SYSTEM ENG
+//2//
+select * from polls_ebook_model;
+id        ebook_name  ebook_imag  e  ebook_author  ebook_br  ebook_su  ebook_ye  ebook_ed  ebook_dr  owner_id
+--------  ----------  ----------  -  ------------  --------  --------  --------  --------  --------  --------
+1         korth       ebook/img/     korth         IT        AM2       III       2019      https://  1       
+
+//3//
+select * from polls_etx_model;
+id        item_name   item_image  i  item_year     manufact  version   sell_pri  rent_pri  rent_pri  owner_id  item_sub  
+--------  ----------  ----------  -  ------------  --------  --------  --------  --------  --------  --------  ----------
+1         arduino     add_new_en  E  2019          optional  optional  500       60        20        1         DS        
+
+//4//
+
+id        novel_name  novel_imag    genre         author    edition   pages     sell_pri  rent_pri  rent_pri  owner_id  
+--------  ----------  ----------    ------------  --------  --------  --------  --------  --------  --------  ----------
+1         jane eyre   novel/img/    tragedy       charlott  2001      250       300       150       25        1         
+2         KITE        novel/img/    classic       NATHEN    2019      250       300       150       25        1         
+3         FIRE        novel/img/    fiction       JAMES     2008      250       400       150       25        1         
+4         BIRD        novel/img/    comedy        KAREN     2010      120       150       50        25        1         
+5         RIVER       novel/img/    children      optional  2019      250       99        50        25        1         
+6         WALKER      novel/img/    mystery       ALAN      2019      250       220       150       25        1         
+sqlite>
+
+//5//
+select * from polls_enotes_model;
+id        enotes_nam  enotes_ima  eno  enotes_branc  enotes_y  enotes_a  enotes_a  enotes_d  owner_id  enotes_s
+--------  ----------  ----------  ---  ------------  --------  --------  --------  --------  --------  --------
+3         dbms        enotes/img       ENTC          II        book      vishal    https://  2         EI      
+4         dsgt        enotes/img       CS            II        teacher   g         https://  5         DSGT    
+
+
+//6//
+select * from polls_owner_model;
+id        ph_num      ac_year     bra  address       user_id   dp      
+--------  ----------  ----------  ---  ------------  --------  --------
+1         9158883887  2           CS   509           1         owner/pd
+2         7066849374  4           IT   509           2                 
+3         12365479    3           mec  dighi         4         media/ow
+4                                                    5                 
+5                                                    6                 
+  ------------------------------------------------------------------------------------------------------------------
+//1
+.schema 'polls_book_model'
+CREATE TABLE "polls_book_model" 
+("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, 
+"book_name" varchar(100) NOT NULL, 
+"book_image" varchar(100) NOT NULL, 
+"pdf" varchar(100) NOT NULL, 
+"book_branch" varchar(100) NOT NULL, 
+"book_year" varchar(100) NOT NULL, 
+"author" varchar(100) NOT NULL, 
+"edition" integer NOT NULL, 
+"sell_price" varchar(100) NOT NULL, 
+"rent_price_per_month" varchar(100) NULL, 
+"rent_price_per_week" varchar(100) NULL, 
+"owner_id" integer NOT NULL REFERENCES "auth_user" ("id"), 
+"book_sub" varchar(100) NOT NULL);
+CREATE INDEX "polls_book_model_owner_id_cea9554b" ON "polls_book_model" ("owner_id");
+
+
+//2
+.schema 'polls_ebook_model'
+CREATE TABLE "polls_ebook_model" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "ebook_name" varchar(100) NOT NULL, "ebook_image" varchar(100) NOT NULL, "ebook_pdf" varchar(100) NOT NULL, "ebook_author" varchar(100) NOT NULL, "ebook_branch" varchar(100) NOT NULL, "ebook_sub" varchar(100) NOT NULL, "ebook_year" varchar(100) NOT NULL, "ebook_edition" integer NULL, "ebook_drive_url" varchar(100) NULL, "owner_id" integer NOT NULL REFERENCES "auth_user" ("id"));
+CREATE INDEX "polls_ebook_model_owner_id_5bac8e25" ON "polls_ebook_model" ("owner_id");
+sqlite> 
+
+
+//3
+.schema 'polls_novel_model'
+CREATE TABLE "polls_novel_model" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "novel_name" varchar(100) NOT NULL, "novel_image" varchar(100) NOT NULL, "novel_pdf" varchar(100) NOT NULL, "genre" varchar(100) NULL, "author" varchar(100) NULL, "edition" integer NULL, "pages" varchar(100) NULL, "sell_price" varchar(100) NULL, "rent_price_per_month" varchar(100) NULL, "rent_price_per_week" varchar(100) NULL, "owner_id" integer NOT NULL REFERENCES "auth_user" ("id"));
+CREATE INDEX "polls_novel_model_owner_id_58567af7" ON "polls_novel_model" ("owner_id");
+sqlite> 
+
+//4
+.schema 'polls_enotes_model'
+CREATE TABLE "polls_enotes_model" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "enotes_name" varchar(100) NOT NULL, "enotes_image" varchar(100) NOT NULL, "enotes_pdf" varchar(100) NOT NULL, "enotes_branch" varchar(100) NOT NULL, "enotes_year" varchar(100) NOT NULL, "enotes_author" varchar(100) NOT NULL, "enotes_author_name" varchar(100) NOT NULL, "enotes_drive_url" varchar(100) NULL, "owner_id" integer NOT NULL REFERENCES "auth_user" ("id"), "enotes_sub" varchar(100) NOT NULL);
+CREATE INDEX "polls_enotes_model_owner_id_4f3115dc" ON "polls_enotes_model" ("owner_id");
+sqlite> 
+
+//5
+.schema 'polls_owner_model'
+CREATE TABLE "polls_owner_model" 
+("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "ph_num" varchar(100) NULL, "ac_year" varchar(100) NULL, "branch" varchar(100) NULL, "address" varchar(100) NULL, "user_id" integer NOT NULL UNIQUE REFERENCES "auth_user" ("id"), "dp" varchar(100) NOT NULL);
+sqlite> 
+
+//6
+.schema 'polls_etx_model'
+CREATE TABLE "polls_etx_model" 
+("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, 
+"item_name" varchar(100) NULL, 
+"item_image" varchar(100) NOT NULL, 
+"item_branch" varchar(100) NULL, 
+"item_year" integer NULL, 
+"manufacturer" varchar(100) NULL, 
+"version" varchar(100) NULL, 
+"sell_price" varchar(100) NULL, 
+"rent_price_per_month" varchar(100) NULL, 
+"rent_price_per_week" varchar(100) NULL, 
+"owner_id" integer NOT NULL REFERENCES "auth_user" ("id"), 
+"item_sub" varchar(100) NULL);
+CREATE INDEX "polls_etx_model_owner_id_77614189" ON "polls_etx_model" ("owner_id");
+

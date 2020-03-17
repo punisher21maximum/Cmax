@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+	<title>convimax</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<head>
+	</head>
+	<body style="font-size:18px;font-family:algerian;padding:40px;color:purple;">
+	<h1 style="font-size:40px;">ConviMax</h1>
+	<hr>
+	<div class="container-fluid"
+	style="border:solid purple 5px;
+	 border-radius: 7px; margin:30px;">
+		<div class="container">
+			
+			
+ 			
+			<div class="row">
+				<div class="col-md-5">
+ 					<form role="form" method="post" action="register.php">
+						<fieldset>							
+							<h4 class="text-uppercase pull-center"> Sign up:</h4>
+							<!-- username -->	
+ 							<div class="form-group" style="padding-bottom: 25px;" >
+								{{ form.full_name.errors }}
+    								<label for="{{ form.full_name.id_for_label }}" >Full Name:</label>
+    								{{ form.full_name }}
+							</div>
+							<!-- email-->
+							<div class="form-group" style="padding-bottom: 25px;" >
+								{{ form.email_id.errors }}
+    								<label for="{{ form.email_id.id_for_label }}">Email:</label>
+    								{{ form.email_id }}
+							</div>
+							<!-- Password-->
+							<div class="form-group" style="padding-bottom: 25px;" >
+								{{ form.password.errors }}
+    								<label for="{{ form.password.id_for_label }}">Password:</label>
+    								{{ form.password }}
+							</div>
+						
+ 							<div style="padding-bottom: 25px;" >
+ 								<input type="submit" class="btn btn-lg btn-primary   value="Sign up">
+ 							</div>
+						</fieldset>
+					</form>
+				</div>
+				<hr>
+				<div class="col-md-2">
+					<!-------null------>
+				</div>
+				
+				<div class="col-md-5">
+ 				 		<form role="form">
+						<fieldset>							
+							<h4 class="text-uppercase"> Sign in: </h4>	
+ 								
+							<!-- email-->
+							<div class="form-group" style="padding-bottom: 25px;" >
+								{{ form.email_id.errors }}
+    								<label for="{{ form.email_id.id_for_label }}">Email:</label>
+    								{{ form.email_id }}
+							</div>
+							<!-- Password-->
+							<div class="form-group" style="padding-bottom: 25px;" >
+								{{ form.password.errors }}
+    								<label for="{{ form.password.id_for_label }}">Password:</label>
+    								{{ form.password }}
+							</div>
+							<div style="padding-bottom: 25px;" >
+								<input type="submit" class="btn btn-md" value="Sign In">
+							</div>
+								 
+ 						</fieldset>
+				</form>	
+				</div>
+			</div>
+		</div>
+		
+
+
+
+
+<hr>
+		
+	</body>
+	 
+
+</html>

@@ -1,0 +1,164 @@
+{% extends 'polls/base.html' %}
+{% load static %}
+{% load bootstrap %}
+{% load crispy_forms_tags %}
+
+<!--link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}"-->
+<!--border: 5px solid purple ; box-sizing: border-box; border-radius: 7px;-->
+{% block body %}
+<!--fullpage-->
+<div class=" " style='padding-top: 10px;   padding-bottom: 1000px;'>
+
+    <!-- search bar -->
+    <div class="row" style="padding-top: 50px;   "> 
+      <div class="col-lg-12 " >  
+        <!-- filters -->
+     
+                <div class="container-fluid filter_index_engg" 
+                    style="width: 98%;font-size:30px;padding: 5px 15px 5px 15px;color:#7754ab; "> 
+                        <div style="font-size:30px;">
+                        <form method="GET">
+              <div class="form-row">
+                                      <div class="form-group col-md-1"> 
+                                      {{ filter.form.sell_price__gt|as_crispy_field }}
+                                      {{ filter.form.sell_price__lt|as_crispy_field }} 
+                                      </div>
+<div class="form-group col-md-2"> 
+   {{ filter.form.edition|as_crispy_field }}
+   {{ filter.form.owner__username|as_crispy_field }} 
+</div>
+                                    <div class="form-group col-md-2">
+                                      {{ filter.form.pages|as_crispy_field }}
+                                      {{ filter.form.ordering|as_crispy_field }}     
+                                    </div>
+<div class="form-group col-md-2">
+  {{ filter.form.genre|as_crispy_field }}  
+ 
+</div>
+
+                                      <div class="form-group col-md-3"> 
+                                        {{ filter.form.novel_name|as_crispy_field }}
+                                        {{ filter.form.author|as_crispy_field }} 
+                                      </div>
+<div class="form-group col-md-2" style='padding:17px;'>
+   
+  <button type="submit" class="text-center button_engg btn-block  ">
+    <p class="text-center " style="font-size: 120%; ">search</p>
+  </button> 
+</div>
+                                        <div class="form-group col-md-1">    
+
+                                        </div>  
+          
+              </div>  
+            </form>   
+                        </div>   
+                </div > 
+        
+        <!-- filters end --> 
+    </div>
+    </div>
+
+
+    <!-- albums and filters -->
+    <div class="row" style="padding-top: 50px;   ">
+
+        <!-- filters -->
+        <div class="col-lg-2 " >  
+                <div class="albums-container container-fluid filter_index" 
+                    style="width: 90%;"> 
+                        <div style="font-size:30px;">
+                          
+                        </div>   
+                </div > 
+        </div >  
+        <!-- filters end -->              
+<br><br>
+        <!-- album -->
+        <div class="col-lg-8" style="
+        color:orange;      
+        font-family:Verdana ;
+        padding: 10px 30px 30px 30px;
+        width: 80%;
+        text-transform: capitalize;letter-spacing: 2px;
+
+        
+        
+        "> 
+            
+            <!--book start-->
+            <div class="row" style="font-size:35px;">
+
+                                                
+            {% if object_list %}
+                {% for Novel_model in  filter.qs %}
+                    <div class="card " style="width: 33.333%;padding:20px;padding-top:30px;">
+
+                            {% if Novel_model.novel_image %}
+                            <a href="{% url 'polls:novel_detail' Novel_model.id  %}">
+                            <img class="card-img-top img-responsive" src="{{ Novel_model.novel_image.url }}"   alt="Card image cap"
+                            style=" padding: 80px; height:400px;">
+                            </a> 
+                            {% endif %}
+
+                          <div class="card-body" >
+                            <h5 class="card-title" style="color:#533b78;">{{Novel_model.owner.username }}</h5>
+
+                            <b style="color:#533b78;font:15px;">{{Novel_model.novel_name }}</b>
+                            <i style="color: #241933 ;font-size:20px;">{{Novel_model.author }}</i>
+
+                            <div style="text-align:right;color:#533b78;">
+                                Rs : {{Novel_model.sell_price }}
+                            </div>
+
+                            <hr>
+                            
+                            <h2 style="color:#8465b3;"> 
+                                Genre :{{ Novel_model.genre }} </br>
+                                Year : {{Novel_model.edition }}      </br>
+                                Pages : {{Novel_model.pages }}    </br>
+                            </h2>
+
+                            <hr>
+
+                            <div style='font-size:30px;color:#6b4c9a;'  >
+                                <i>Rent:</i>&nbsp;&nbsp;
+                                <b  >{{Novel_model.rent_price_per_day }}/day</b>&nbsp;&nbsp;
+                                <b  >{{Novel_model.rent_price_per_week}}/week</b><hr>    
+                            </div>
+
+                            <br>
+                            
+                            <a href="{% url 'polls:novel_detail' Novel_model.id  %}" 
+                            class="text-center button_engg btn-block btn-lg" role="button"><b>MORE</b></a>
+                        </div>
+                    </div>
+                
+             
+                {% endfor %}
+            {% else %}
+               <h1 class=" col-sm-12 detail_heading" style="width: 100%";>  NO BOOKS </h1> 
+            {% endif %}
+            
+            <!--book end-->
+                                    
+            <!--paginator --> 
+            <div class="col-lg-12  " >            
+              {% include "polls/side_bar_paginator.html" %}                 
+            </div>
+            <!--paginator end--> 
+                                    
+        </div>
+        <!-- album  end-->
+
+        </div > 
+     <!-- album filter end-->
+            <!-- right side bar -->
+            <div class="col-lg-2  " >  
+                        {% include "polls/side_bar_all.html" %} 
+            </div >
+            <!-- right side bar end --> 
+    </div>
+</div>
+{% endblock %}
+

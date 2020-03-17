@@ -1,0 +1,10 @@
+id|book_name|pdf|book_branch|book_sub|book_year|author|edition|sell_price|rent_price_per_month|rent_price_per_week|owner_id|book_image
+1|kk||CS|DS|I|kkk|2019|500|400|100|1|add_new_etx.png
+2|my_book_updated||CS|EI|I|you are the aouthor|2019|400|100|60|1|add_new_enotes.png
+3|hugo||IT|DSGT|II|kash|2017|300|100|50|2|Screenshot_from_2019-04-07_150500.png
+4|rdsharma||FY|AM2|I|rdsharma|2009|400|200|100|2|add_new_novel.png
+5|BV RAMANA||FY|MATHS|I|BV RAMANA|2008|600|200|50|1|bv.jpg
+6|KORTH||CS|DBMS|II|korth|2015|400|200|100|1|korth.jpg
+9|kamikaze||CS|MATHS|IV|eminem|2011|300|100|50|1|book/pdf/no_image.jpg
+10|python informatics|pdf|cs|programmig|2016|vishal|6|550|||1|book/pdf/no_image.jpg
+11|django|pdf|cs|programmig|2012|monty|6|250|||1|image

@@ -1,0 +1,267 @@
+{% extends 'polls/base.html' %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+{% block title %}Add a New Book{% endblock %}
+</head>
+<body>
+{% block body %}
+
+
+
+<div class="index_page_bg">
+
+<div >
+
+     <div class="row">
+       <!-- filters -->
+
+        <div class="col-lg-2  " >  
+                <div class="albums-container container-fluid filter_index"
+                    style="width: 90%;"> 
+        
+                    <h1> ADD NEW </h1><hr>
+                        <a class="nav-link flex-column active font_size" href="{% url 'polls:book-add'  %}">
+                        <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Engg Book"|upper}}</button>
+                      </a><br>
+
+                      <a class="nav-link flex-column active font_size" href="{% url 'polls:ebook_add'  %}">
+                        <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Ebook"|upper}}</button>
+                      </a><br>
+
+                      <a class="nav-link flex-column active" href="{% url 'polls:enotes_add'  %}">
+                        <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Enotes"|upper}}</button>
+                        </a><br>
+
+                      <a class="nav-link  flex-column active" href="{% url 'polls:novel_add'  %}">
+                        <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Novel"|upper}}</button>
+                        </a><br>
+
+                      <a class="nav-link flex-column active" href="{% url 'polls:etx_add' %}">
+                        <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Etx"|upper}}</button>
+                        </a>  
+                        
+                          
+
+                </div > 
+        </div >  
+        <!-- filters end--> 
+
+        <div class="col-lg-8 " 
+style=" padding:100px 200px;
+color:maroon;   background-color: white;
+font-family:Verdana  ;
+width:80%;font-weight: 900;font-size: 30px;
+text-transform: capitalize;letter-spacing: 2px; 
+">
+ 
+
+
+            <h1 class="detail_heading">ADD A NEW BOOK </h1>
+            {% if error_message %}
+                <p><strong>{{ error_message }}</strong></p>
+            {% endif %}
+            <!-- form starts here -->
+            <form class="form-horizontal " role="form" action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <fieldset>
+		            <p style="text-align:right;"><i >{{ user.username }}</i><p><hr>
+                
+
+
+
+
+<div class="form-row">                        
+      <div class="col-md-6 mb-3 fieldWrapper "  >
+    			<label for="{{ form.book_name.id_for_label }} " >{{ field.book_name.label_tag }}</label>
+    			{{ form.book_name|attr:"autofocus"|attr:"placeholder:Book Name"|as_crispy_field}}
+			</div>
+      
+
+      <div class="col-md-6 mb-3 fieldWrapper "  >
+          <label for="{{ form.author.id_for_label }}"></label>
+          {{ form.author|as_crispy_field }}
+          <!--{% render_field form.book_name class="form-control" placeholder=form.book_name.label %}-->
+      </div>
+</div>
+                             
+
+
+
+      
+
+<div class="form-row">
+      <div class="col-md-6 mb-3 fieldWrapper " style=>
+    			<label for="{{ form.book_branch.id_for_label }}"></label>
+    			{{ form.book_branch|as_crispy_field }}
+			</div>
+      <div class="col-md-6 mb-3 fieldWrapper " >
+    			<label for="{{ form.book_sub.id_for_label }}"></label>
+    			{{ form.book_sub|as_crispy_field }}
+			</div>
+</div>
+<div class="form-row">
+      <div class="col-md-6 mb-3 fieldWrapper " >
+          <label for="{{ form.book_year.id_for_label }}"></label>
+          {{ form.book_year|as_crispy_field }}
+      </div>
+
+      <div class="col-md-6 mb-3 fieldWrapper " >
+          <label for="{{ form.edition.id_for_label }}"><p> </p></label>
+          {{ form.edition|as_crispy_field }}
+      </div>
+</div>
+<div class="form-row">
+      <div class="col-md-6 mb-3 fieldWrapper " >
+          <label for="{{ form.rent_price_per_month.id_for_label }}"></label>
+          {{ form.rent_price_per_month|as_crispy_field }}
+      </div>
+      <div class="col-md-6 mb-3 fieldWrapper " >
+          <label for="{{ form.rent_price_per_week.id_for_label }}"></label>
+          {{ form.rent_price_per_week|as_crispy_field }}
+      </div>
+</div>
+      
+      <div  class=" field {{ field|field_type }} {{ field|widget_type }} {{ field.html_name }}">
+          <label for="{{ form.sell_price.id_for_label }}"></label>
+          {{ form.sell_price|attr:"placeholder:price for selling"|as_crispy_field }}
+      </div>
+      <div  class="fieldWrapper">
+          <label for="{{ form.star.id_for_label }}"></label>
+          <p> star </p> {{ form.star }}
+      </div>
+<!-- --><br><br>
+<div class="form-row">       
+                
+      <div class="col-md-6 mb-3 fieldWrapper dropzone"  style="text-align:center;" >
+          <label for="{{ form.book_image.id_for_label }}"></label>
+          {{ form.book_image |as_crispy_field}}
+      </div>
+      <div class="col-md-6 mb-3 fieldWrapper dropzone"   style="text-align:center;">
+          <label for="{{ form.pdf.id_for_label }}"></label>
+          {{ form.pdf|as_crispy_field }}
+      </div>
+     
+</div>
+            
+<!-- -->
+      
+
+
+
+
+
+
+      <br><hr><br>
+      <div class="form-group book_create_form " >
+          <button type="submit" class="btn text-white btn-block btn-lg detail_heading" >
+            <b>Submit</b></button>
+      </div>
+      <div class="form-group book_create_form " >
+          <button type="reset" class="btn text-white btn-block btn-lg detail_heading button" >
+            <b>Reset</b></button>
+      </div>
+			</fieldset>
+			   
+                    </form>
+
+                    
+            
+        </div>
+
+       
+         <!-- filters -->
+
+        <div class="col-lg-2  " >  
+                <div class="albums-container container-fluid filter_index"
+                    style="width: 90%;"> 
+        
+                    <h1> ADD NEW </h1><hr>
+                        <a class="nav-link flex-column active font_size" href="{% url 'polls:book-add'  %}">
+                        <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Engg Book"|upper}}</button>
+                      </a><br>
+
+                      <a class="nav-link flex-column active font_size" href="{% url 'polls:ebook_add'  %}">
+                        <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Ebook"|upper}}</button>
+                      </a><br>
+
+                      <a class="nav-link flex-column active" href="{% url 'polls:enotes_add'  %}">
+                        <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Enotes"|upper}}</button>
+                        </a><br>
+
+                      <a class="nav-link  flex-column active" href="{% url 'polls:novel_add'  %}">
+                        <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Novel"|upper}}</button>
+                        </a><br>
+
+                      <a class="nav-link flex-column active" href="{% url 'polls:etx_add' %}">
+                        <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Etx"|upper}}</button>
+                        </a>  
+                        
+                          
+
+                </div > 
+        </div >  
+        <!-- filters end--> 
+    </div>
+
+</div>
+</div>
+{% endblock %}
+
+</body>
+
+</html>
+<script>
+
+$(document).ready(function(){
+ 
+ Dropzone.options.dropzoneFrom = {
+  autoProcessQueue: false,
+  acceptedFiles:".png,.jpg,.gif,.bmp,.jpeg",
+  init: function(){
+   var submitButton = document.querySelector('#submit-all');
+   myDropzone = this;
+   submitButton.addEventListener("click", function(){
+    myDropzone.processQueue();
+   });
+   this.on("complete", function(){
+    if(this.getQueuedFiles().length == 0 && this.getUploadingFiles().length == 0)
+    {
+     var _this = this;
+     _this.removeAllFiles();
+    }
+    list_image();
+   });
+  },
+ };
+
+ list_image();
+
+ function list_image()
+ {
+  $.ajax({
+   url:"upload.php",
+   success:function(data){
+    $('#preview').html(data);
+   }
+  });
+ }
+
+ $(document).on('click', '.remove_image', function(){
+  var name = $(this).attr('id');
+  $.ajax({
+   url:"upload.php",
+   method:"POST",
+   data:{name:name},
+   success:function(data)
+   {
+    list_image();
+   }
+  })
+ });
+ 
+});
+</script>

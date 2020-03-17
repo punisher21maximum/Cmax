@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+{% block title %}Add a New Book{% endblock %}
+</head>
+<body>
+{% block body %}
+<!-- filters -->
+
+        <div class="col-lg-2  " >  
+                <div class="albums-container container-fluid filter_index"
+                    style="width: 90%;"> 
+        
+                    <h1> ADD NEW </h1><hr>
+                        <a class="nav-link flex-column active font_size" href="{% url 'polls:book-add'  %}">
+                        <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Engg Book"|upper}}</button>
+                      </a><br>
+
+                      <a class="nav-link flex-column active font_size" href="{% url 'polls:ebook_add'  %}">
+                        <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Ebook"|upper}}</button>
+                      </a><br>
+
+                      <a class="nav-link flex-column active" href="{% url 'polls:enotes_add'  %}">
+                        <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Enotes"|upper}}</button>
+                        </a><br>
+
+                      <a class="nav-link  flex-column active" href="{% url 'polls:novel_add'  %}">
+                        <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Novel"|upper}}</button>
+                        </a><br>
+
+                      <a class="nav-link flex-column active" href="{% url 'polls:etx_add' %}">
+                        <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Etx"|upper}}</button>
+                        </a>  
+                        
+                          
+
+                </div > 
+        </div >  
+<!-- filters end--> 
+
+
+{% endblock %}
+</body>
+
+</html>

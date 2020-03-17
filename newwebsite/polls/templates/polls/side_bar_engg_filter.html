@@ -1,0 +1,18 @@
+{% load crispy_forms_tags %}
+<div class="albums-container container-fluid filter_index   " 
+                    style=" width: 90%;"> 
+                        <div style="font-size:30px;">
+                        <form method="GET">
+ 
+                             <button type="submit" class="btn btn-outline-danger btn-block">
+                             <p class="text-center " style="font-size: 200%; ">search</p>
+                           </button><hr>
+                           
+                            {{ filter.form|crispy }}
+                            
+                            
+                            <hr><button type="submit" class="btn btn-outline-danger btn-block">submit</button>
+                            <button type="reset" class="btn btn-outline-info btn-block">Reset</button><hr>
+                        </form>  
+                        </div>   
+</div >

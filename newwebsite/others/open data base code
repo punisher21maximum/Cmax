@@ -1,0 +1,100 @@
+https://www.tutorialspoint.com/sqlite/sqlite_syntax.htm
+
+sqlite3  db.sqlite3
+
+.tables
+
+.schema 'polls_book_model'			//create statement
+	
+.header(s) ON|OFF
+
+.mode column
+		csv − Comma-separated values
+
+		column − Left-aligned columns.
+
+		html − HTML <table> code
+
+		insert − SQL insert statements for TABLE
+
+		line − One value per line
+
+		list − Values delimited by .separator string
+
+		tabs − Tab-separated values
+
+		tcl − TCL list elements
+.width 3 10 10 1 8 8 8 8 8 8 8
+
+select * from polls_book_model;
+
+.quit
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+1]
+select * from polls_book_model;
+
+2]
+UPDATE polls_book_model SET sell_price = 500 where id=1;                --can change id
+
+3]
+DELETE FROM polls_book_model WHERE id=1;
+
+4]
+insert into polls_book_model 
+(book_name,book_image,pdf,book_branch,book_year,author,edition,sell_price,owner_id,book_sub)
+values('django','image','pdf','cs','2012','monty',6,'250',1,'programmig');
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+some queries
+
+1]update: polls_book_model: sell_price by id
+
+UPDATE polls_book_model
+SET sell_price = 500
+where id=1;
+
+2]select cs books
+
+select * from polls_book_model where book_branch='CS';
+
+3]count
+select count(*) from polls_book_model where book_branch='CS';//3
+select count(*) from polls_book_model ;//7
+
+4]order by
+select * from polls_book_model where book_branch='CS' order by sell_price;
+
+5]and , or
+select * from polls_book_model where  id=1 or id=3;
+select * from polls_book_model where book_branch='CS' and edition=2019;
+
+6]sum,avg,count
+select avg(sell_price),sum(sell_price),count(id) from polls_book_model ;
+
+7]in
+select avg(sell_price),sum(sell_price),count(id) from polls_book_model ;
+
+8]between
+select * from polls_book_model where id between 1 and 3;
+
+9]distinct
+select distinct edition from polls_book_model;
+
+10]limit
+select * from polls_book_model limit 3;
+
+joins-------------------
+SELECT *
+FROM polls_book_model
+INNER JOIN polls_novel_model
+ON polls_book_model.id = polls_novel_model.id;
+
+select *
+   ...> from polls_book_model
+   ...> inner join polls_novel_model
+   ...> on polls_book_model.id = polls_novel_model.id;
+
+
+
+

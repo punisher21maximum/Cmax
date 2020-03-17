@@ -1,0 +1,294 @@
+
+{% extends 'polls/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+<!DOCTYPE html>
+<head>
+<link rel="stylesheet" type="text/css" href="{% static 'polls/css/style.css' %}" />
+<link rel="stylesheet" type="text/css"  href="{% static 'polls/bootstrap/css/bootstrap.min.css' %}"/>
+
+<link rel="stylesheet" type="text/css"  href="{% static 'polls/css/global.css' %}">
+
+<script type="text/javascript" src="{% static 'polls/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--
+  <script type="text/javascript" src="{% static 'polls/bootstrap/js/jquery.min.js' %}"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+-->
+<title>{% block title %}ConviMax{% endblock %}</title>
+</head>
+<body>
+{% block body %}
+<div style="padding-bottom: 1000px;
+
+background: rgba(255,0,132,1);
+background: -moz-linear-gradient(left, rgba(255,0,132,1) 0%, rgba(255,0,132,0) 100%);
+background: -webkit-gradient(left top, right top, color-stop(0%, rgba(255,0,132,1)), color-stop(100%, rgba(255,0,132,0)));
+background: -webkit-linear-gradient(left, rgba(255,0,132,1) 0%, rgba(255,0,132,0) 100%);
+background: -o-linear-gradient(left, rgba(255,0,132,1) 0%, rgba(255,0,132,0) 100%);
+background: -ms-linear-gradient(left, rgba(255,0,132,1) 0%, rgba(255,0,132,0) 100%);
+background: linear-gradient(to right, rgba(255,0,132,1) 0%, rgba(255,0,132,0) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff0084', endColorstr='#ff0084', GradientType=1 );
+
+
+
+
+">
+  <!--header class="site-header">
+    <nav class="navbar navbar-expand-md navbar-dark nav-justified" 
+    style="font-size:50px;padding-top:40px;font-family:monospace;
+    background-color:  #b20066;color:white;">
+      <a class="navbar-brand" href="{% url 'polls:index' %}" >
+        <img src="{% static "polls/images/maxw.png" %}"  width="200" height="150" alt="">
+      </a>
+            <div class="collapse navbar-collapse" id="navbarToggle">
+                     <div style="font-size:60px;" class="navbar-nav mr-auto" >    
+                     
+                                             
+                                      <a class="nav-link flex-column active" href="{% url 'polls:ebook_add'  %}">
+                                        {{"+Ebook"|upper}}</a><pre>  </pre>
+                                      <a class="nav-link flex-column active" href="{% url 'polls:enotes_add'  %}">
+                                        {{"+Enotes"|upper}}</a><pre>  </pre>
+                                      <a class="nav-link  flex-column active" href="{% url 'polls:novel_add'  %}">
+                                        {{"+Novel"|upper}}</a><pre>  </pre>
+                                      <a class="nav-link flex-column active" href="{% url 'polls:etx_add' %}">
+                                        {{"+Etx"|upper}}</a>  <pre>  </pre>
+                                      <a class="nav-link flex-column active" href="{% url 'polls:book-add' %}">
+                                        {{"+Enggbook"|upper}}</a>  <pre>  </pre>
+
+                                
+                    <pre>   </pre>
+                                
+                                <div style="font-family:'calibri';">
+
+                            
+                                <ul class="navbar-nav">
+                                    {% if user.is_authenticated %}     
+                                    <li class="nav-item mr-auto">                  
+                                      <a class="nav-item flex-column nav-link active " href="{% url 'polls:owner_profile' %}">{{"profile"|upper}}</a>
+                                    </li><pre>  </pre>
+                                    <li class="nav-item mr-auto">
+                                      <a class="nav-item flex-column nav-link active mr-auto" href="{% url 'polls:logout' %}" style="text-align: right">{{"logout"|upper}}</a>
+                                    </li>
+                                </ul> 
+                                    {% else %}
+                                      <a class="nav-item  flex-column nav-link active" href="{% url 'polls:login' %}">{{"login"|upper}}</a>
+                                      <a class="nav-item flex-column nav-link active" href="{% url 'polls:register' %}">{{"register"|upper}}</a>
+                                    {% endif %}                                                   
+                              </div>
+                                
+                      </div>
+    </nav>
+</header-->
+<div style="padding-top: 0px;   padding-bottom: 1000px;     
+
+background: rgba(197,13,214,1);
+background: -moz-linear-gradient(left, rgba(197,13,214,1) 0%, rgba(188,204,145,1) 23%, rgba(124,109,232,1) 51%, rgba(118,179,139,1) 76%, rgba(235,23,94,1) 100%);
+background: -webkit-gradient(left top, right top, color-stop(0%, rgba(197,13,214,1)), color-stop(23%, rgba(188,204,145,1)), color-stop(51%, rgba(124,109,232,1)), color-stop(76%, rgba(118,179,139,1)), color-stop(100%, rgba(235,23,94,1)));
+background: -webkit-linear-gradient(left, rgba(197,13,214,1) 0%, rgba(188,204,145,1) 23%, rgba(124,109,232,1) 51%, rgba(118,179,139,1) 76%, rgba(235,23,94,1) 100%);
+background: -o-linear-gradient(left, rgba(197,13,214,1) 0%, rgba(188,204,145,1) 23%, rgba(124,109,232,1) 51%, rgba(118,179,139,1) 76%, rgba(235,23,94,1) 100%);
+background: -ms-linear-gradient(left, rgba(197,13,214,1) 0%, rgba(188,204,145,1) 23%, rgba(124,109,232,1) 51%, rgba(118,179,139,1) 76%, rgba(235,23,94,1) 100%);
+ ">
+
+    <!-- albums and filters -->
+    <div class="row" style="padding-top: 50px;   ">
+    <!-- filters -->
+        <div class="col-lg-2 " >  
+                <div class="albums-container container-fluid"
+
+                    style="
+
+                    color:rgba(169,3,41,1);;   background-color: white; 
+                    font-family:monospace  ; font-size:25px;
+                    
+                    padding: 50px 15px 75px 15px;                          
+                    box-sizing: border-box; border-radius: 7px;
+                    width: 90%;
+                    
+                    text-transform: capitalize;letter-spacing: 2px;
+
+                    background-image:url('');
+
+                    -webkit-box-shadow: 3px 1px 22px 18px rgba(0,0,0,0.75);
+                    -moz-box-shadow: 3px 1px 22px 18px rgba(0,0,0,0.75);
+                    box-shadow: 3px 1px 22px 18px rgba(0,0,0,0.75);                    
+                                "
+                    > 
+        
+
+                <form method="GET">
+                    <button type="submit" class="btn btn-outline-primary btn-block">submit</button><hr>
+
+                    {{ filter.form|crispy }} 
+
+                    <hr><button type="submit" class="btn btn-outline-primary btn-block">submit</button>
+                    
+
+                </form>     
+                </div > 
+        </div >  
+        <!-- filters end-->
+        <br><br>
+        <!-- disp profile -->
+        <div class="col-lg-7" >
+
+          <!--book start-->
+            <div class="row" style="font-size:35px;">
+
+                                                
+            {% if star_books %}
+                {% for book_model in  star_books %}
+                {% if book_model.star %}
+                                                                                                                               <!-- card-->
+                    <div class="card " style="width: 33.333%;padding:50px;padding-top:30px;">
+
+                            <a href="{% url 'polls:detail' book_model.id  %}">
+                            <img class="card-img-top img-responsive" src="{{ book_model.book_image.url }}"   alt="Card image cap"
+                            style=" padding: 80px; height:400px;">
+                            </a>
+
+                          <div class="card-body" >
+                            <h5 class="card-title" style="color:maroon">{{book_model.owner.username }}</h5>
+
+                            <p><b style="color:orange;font:15px;">{{book_model.book_name }}
+                                <i style="font-size:20px;text-align:right;">{{book_model.author }}</i></b></p>
+    <!--star begin-->
+<a href="{{ book_model.get_remove_from_fav_url }}" class="btn btn-primary btn-md my-0 p">
+              remove to fav
+              <i class="fas fa-shopping-cart ml-1"></i>
+    </a>
+  
+
+    <!--star end--><hr>
+
+                            <h2> Branch :{{ book_model.book_branch }} </br>
+                                Sub : {{book_model.book_sub }}    </br>
+                                Year : {{book_model.book_year }}      </br>
+                                <b>Rs : {{book_model.sell_price }}</b>
+                            </h2>
+                                                                                        
+                            </br>
+                            <a href="{% url 'polls:detail' book_model.id  %}" class="btn btn-primary btn-block" role="button">View Details</a>
+                          </div>
+                    </div>
+                
+                <!-- -- >  <p>&nbsp;</p>  
+                {% endif %} 
+                {% endfor %}
+            {% else %}
+                <div class="col-sm-12">
+                    No Books
+                </div>
+            {% endif %}
+            </div>
+            <!--book end-->
+
+                <div class="container-fluid bg-rgb(128, 255, 191)" style="  
+                    background-color:white;
+                    color:rgba(169,3,41,1);  
+                    font-family:monospace  ; font-size:25px;
+                    
+                    padding: 50px 15px 75px 15px;                          
+                    box-sizing: border-box; border-radius: 7px;
+                    width: 100%;
+                    
+                    text-transform: capitalize;letter-spacing: 2px;
+                    {% if user.owner_model.dp %}
+                    background-image:url('{{ user.owner_model.dp.url }}');  
+                    {% endif %} 
+              
+
+                    -webkit-box-shadow: 3px 1px 22px 18px rgba(0,0,0,0.75);
+                    -moz-box-shadow: 3px 1px 22px 18px rgba(0,0,0,0.75);
+                    box-shadow: 3px 1px 22px 18px rgba(0,0,0,0.75);
+                "><br>
+
+                <h3 style="text-align: center;font-size:60px;">{{user|upper}}
+                </h3><br><br>
+
+
+                    <div class="text-center">
+                          {% if user.owner_model.dp %}
+                            <img  src="{{ user.owner_model.dp.url }}" class="img-responsive img-circle "style=" width:50%;height:100%;border-radius: 7px;border:solid #f2f2f2 15px;border-radius: 50%;
+                            text-align: left;">
+                          {% endif %}<br><br>               
+                    </div>
+
+                <div style="background-color:white;">
+                         <table  class="table  table-bordered  table-hover "style="border: 5px solid white;font-size: 30px; ">
+                                    <thead>
+                                            <tr class="danger"><th>{{ user.username}}</th></tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr ><td>{{ user.email}}</td></tr>
+                                      <tr ><td>{{ user.owner_model.ph_num}}</td></tr>
+                                      <tr ><td>{{ user.owner_model.ac_year}}nd Year</td></tr>
+                                      <tr ><td>{{ user.owner_model.branch}}</td></tr>
+                                      <tr ><td>Address: {{ user.owner_model.address}}</td></tr>      
+                                    </tbody>
+                         </table>
+                </div>
+                </div>
+
+        </div >
+        <!-- disp profile end-->
+
+<br><br><br>
+<!-- update form -->
+
+            <div class="col-lg-3" >
+            <div class="container-fluid bg" style="color:rgba(169,3,41,1);;   background-color: white; 
+                    font-family:monospace  ; font-size:25px;
+                    
+                    padding: 50px 15px 75px 15px;                          
+                    box-sizing: border-box; border-radius: 7px;
+                    width: 90%;
+                    
+                    text-transform: capitalize;letter-spacing: 2px;
+
+                    background-image:url('');
+
+                    -webkit-box-shadow: 3px 1px 22px 18px rgba(0,0,0,0.75);
+                    -moz-box-shadow: 3px 1px 22px 18px rgba(0,0,0,0.75);
+                    box-shadow: 3px 1px 22px 18px rgba(0,0,0,0.75);
+            ">
+                            <form  class="form-container " role="form" action="" method="post" enctype="multipart/form-data"
+                            style="">
+
+                                {% csrf_token %}
+
+                                <h1 style="font-size:55px;text-align:center;"> {{'Edit Profile'|upper}} </h1><br>
+
+                                <hr>
+                                    <div style="font-size:30px;"> 
+                                    {{ u_form|crispy }}
+                                    {{ p_form|crispy}}
+                                    </div>  
+
+                                <br>
+
+                                <button type="submit" class="btn btn-outline-success btn-block form-group " style="  ">
+                                  Submit
+                                </button><br>
+
+
+             
+            </div>
+            
+            <!-- update form  end-->
+            </div>
+     
+</div>
+</div>
+{% endblock %}
+</body>
+</html>
+
+
+
+<!--{% for name, value in user.owner_model.get_fields %}
+                          
+                              
+                          
+                        {% endfor %}-->

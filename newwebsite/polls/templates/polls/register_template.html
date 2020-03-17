@@ -1,0 +1,49 @@
+{% load crispy_forms_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>Bootstrap</title>
+<link rel="stylesheet" type="text/css"  href="{% static 'polls/bootstrap/css/bootstrap.min.css' %}"/>
+<link rel="stylesheet" type="text/css"  href="{% static 'polls/css/global.css' %}">
+<!-- my written  -->
+<link rel="stylesheet" type="text/css"  href="{% static 'polls/css/style_login.css' %}">
+</head>
+<body>
+{% block body %}
+ 
+<div class="row" >
+  <div class="col-lg-4"></div>
+  <div class="col-lg-4 login_column" >
+    <form  class="form-container login_style" role="form" action="" method="post" enctype="multipart/form-data" >
+    {% csrf_token %}
+          <div class='form_text' >
+              <h1 class='cmax_text text-center ' > ConviMax </h1><br>
+              
+              {{ form|crispy}}
+                  
+              <!--"Submit" -->
+              <br><button type="submit" class="btn btn-danger btn-block "  ><h3>Submit</h3></button><hr>
+
+              <a class='form_text'  href="{% url 'polls:login'  %}"> Already have an account?   Log In or Sign In</a>
+          </div>
+    </form>
+    <hr>
+  </div>  
+  <div class="col-lg-4"></div>
+</div>
+ 
+
+
+{% endblock %}
+ <!--div class="navbar-nav">
+              {% if owner.is_authenticated %}
+                
+                <a class="nav-item nav-link" href="{% url 'polls:logout' %}">Logout</a>
+              {% else %}
+                <a class="nav-item nav-link" href="{% url 'polls:login' %}">Login</a>
+                <a class="nav-item nav-link" href="{% url 'polls:register' %}">Register</a>
+              {% endif %}
+        </div>
+<div-->

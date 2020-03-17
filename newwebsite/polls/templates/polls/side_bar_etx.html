@@ -1,0 +1,21 @@
+<div class="albums-container container-fluid filter_index text-center"
+                style="width: 90%;"> 
+
+            <h1 style="color:#6b4c9a;" > ADD NEW </h1><hr> 
+              <a class="nav-link flex-column active font_size" href="{% url 'polls:etx_arduino_index'  %}">
+                <button type="button" class="text-center button_engg btn-block btn-lg">{{"Arduino Index"|upper}}</button>
+              </a><br>
+
+              <a class="nav-link flex-column active font_size" href="{% url 'polls:etx_calc_index'  %}">
+                <button type="button" class="text-center button_engg btn-block btn-lg">{{"Calc Index"|upper}}</button>
+              </a><br>
+
+              <a class="nav-link flex-column active font_size" href="{% url 'polls:etx_calc_add'  %}">
+                <button type="button" class="text-center button_engg btn-block btn-lg">{{"Calc Add"|upper}}</button>
+              </a><br>
+                  
+
+              <a class="nav-link  flex-column active" href="{% url 'polls:etx_arduino_add'  %}">
+                <button type="button" class="text-center button_engg btn-block btn-lg">{{"Arduino Add"|upper}}</button>
+                </a><br>
+</div >

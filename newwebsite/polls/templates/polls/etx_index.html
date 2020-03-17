@@ -1,0 +1,97 @@
+{% extends 'polls/base.html' %}
+{% load static %}
+{% load bootstrap %}
+{% load crispy_forms_tags %}
+
+<!--link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}"-->
+<!--border: 5px solid purple ; box-sizing: border-box; border-radius: 7px;-->
+{% block body %}
+<!--fullpage-->
+<div class="index_page_bg">
+
+    <!-- albums and filters -->
+    <div class="row" style="padding-top: 50px;   ">
+
+         <!-- filters -->
+
+    <div class="col-lg-2  " >  
+            {% include "polls/side_bar_etx.html" %} 
+    </div >  
+                 
+<br><br>
+        <!-- album -->
+        <div class="col-lg-8 index_middle_bg" style="padding: 10px 30px;"> 
+            
+            <!--book start-->
+            <div class="row" style="font-size:35px;">
+
+                                                
+            {% if object_list %}
+                {% for etx_model in  latest_owner_list %}
+                    <div class="card " style="width: 33%; ">
+
+                              {% if  etx_model.item_image %}
+                                <a href="{% url 'polls:etx_detail' etx_model.id  %}">
+                                  <img class="card-img-top img-responsive" src="{{ etx_model.item_image.url }}"   
+                                  alt="Card image cap" style=" padding: 80px; height:400px;">
+                                </a>
+                              {% endif %}
+
+                          <div class="card-body" >
+                            <h5 class="card-title" style="color:maroon">{{etx_model.owner.username }}</h5>
+
+                            <p><b style="color:orange;font:15px;">{{etx_model.item_keyword1 }}</b></p>
+                              {% if etx_model.manufacturer != 'optional' %}
+                                <i style=" text-align:right;">{{etx_model.manufacturer }}</i><hr>
+                              {% endif %}
+                            <h2> 
+                              {% if etx_model.item_keyword2 != 'optional' %}
+                                <i style=" text-align:right;">{{etx_model.item_keyword2 }}</i><hr>
+                              {% endif %}
+                              {% if etx_model.item_keyword3 != 'optional' %}
+                                <i style=" text-align:right;">{{etx_model.item_keyword3 }}</i><hr>
+                              {% endif %}
+                              {% if etx_model.item_keyword4 != 'optional' %}
+                                <i style=" text-align:right;">{{etx_model.item_keyword4 }}</i><hr>
+                              {% endif %}
+                              {% if etx_model.version != 'optional' %}
+                                version <i style=" text-align:right;">{{etx_model.version }}</i><hr>
+                              {% endif %}
+
+                                
+                            </h2>
+
+                                                                                        
+                            
+                            <a href="{% url 'polls:etx_detail' etx_model.id  %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+                          </div>
+
+                    </div>
+                
+                  
+                     
+                {% endfor %}
+            {% else %}
+                
+                    <h1 class=" col-sm-12 detail_heading">  NO BOOKS </h1>
+              
+            {% endif %}
+            </div>
+                                                                          
+        </div>
+        <!-- album  end-->
+
+     
+     <!-- album filter end-->
+
+             <!-- right side bar -->
+      <div class="col-lg-2  " >  
+                {% include "polls/side_bar_all.html" %} 
+      </div >
+      <!-- right side bar end --> 
+    </div>
+
+    
+</div>
+{% endblock %}
+

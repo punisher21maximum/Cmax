@@ -1,0 +1,170 @@
+{% extends 'polls/base.html' %}
+{% load static %}
+{% load bootstrap %}
+{% load crispy_forms_tags %}
+
+<!--link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}"-->
+<!--border: 5px solid purple ; box-sizing: border-box; border-radius: 7px;-->
+{% block body %}
+<!--fullpage-->
+<div class="index_page_bg">
+
+    <!-- albums and filters -->
+    <div class="row" style="padding-top: 50px;   ">
+
+         <!-- filters -->
+
+    <div class="col-lg-2  " >  
+            <div class="albums-container container-fluid filter_index"
+                style="width: 90%;"> 
+
+            <h1> ADD NEW </h1><hr>
+                <a class="nav-link flex-column active font_size" href="{% url 'polls:book-add'  %}">
+                <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Engg Book"|upper}}</button>
+              </a><br>
+
+              <a class="nav-link flex-column active font_size" href="{% url 'polls:ebook_add'  %}">
+                <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Ebook"|upper}}</button>
+              </a><br>
+
+              <a class="nav-link flex-column active" href="{% url 'polls:enotes_add'  %}">
+                <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Enotes"|upper}}</button>
+                </a><br>
+
+              <a class="nav-link  flex-column active" href="{% url 'polls:novel_add'  %}">
+                <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Novel"|upper}}</button>
+                </a><br>
+
+              <a class="nav-link flex-column active" href="{% url 'polls:etx_add' %}">
+                <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Etx"|upper}}</button>
+                </a>  
+                    
+                      
+
+            </div > 
+    </div >  
+        <!-- filters end-->             
+<br><br>
+        <!-- album -->
+        <div class="col-lg-8 index_middle_bg" style="padding: 10px 30px;"> 
+            
+            <!--book start-->
+            <div class="row" style="font-size:35px;">
+
+                                                
+            {% if object_list %}
+                {% for model in  latest_owner_list %}
+                    <div class="card " style="width: 33%;  ">
+
+                          {% if  model.item_image %}
+                            <a href="{% url 'polls:etx_arduino_detail' model.id  %}">
+                              <img class="card-img-top img-responsive" src="{{ model.item_image.url }}"   
+                              alt="Card image cap" style=" padding: 80px; height:400px;">
+                            </a>
+                          {% endif %}
+
+                          <div class="card-body" >
+                            <h5 class="card-title" style="color:maroon">{{model.owner.username}}</h5><hr>
+<!-- unique -->
+                            <b class='text-primary' style=" font:15px;">{{ model.type_A }}</b>
+
+                            <div style="text-align:right;" style=" font-size:60px;text-align:right;" >
+                            <b class='text-info'> 
+                              Rs&nbsp;{{ model.sell_price }}
+                            </b>
+                            </div>
+
+                            
+                               
+                               
+                              
+                               
+                            <h2 class='text-secondary'> 
+                              <!-- cable -->
+                              {% if model.cable %}
+                                <i  >With Arduino Cable</i><hr>
+                              {% else %}
+                                <i>{{ 'No Arduino Cable' }}</i><hr>
+                              {% endif %}
+                              <!-- jumper_wires -->
+                              {% if model.jumper_wires == 'none' %}
+                                <i>{{ 'No Jumper wires' }}</i><hr>
+                              {% else %}
+                                <i>{{ 'With Jumper wires' }}</i><hr>
+                              {% endif %}
+                              <!-- jumper_qty -->
+                              {% if model.jumper_wires != 'none' %}
+                                version <i  >{{model.jumper_qty }}</i><hr>
+                              {% endif %}
+   
+                            </h2>
+
+<!-- unique end -->
+                            <div style='font-size:30px;' class='text-info'>
+
+                            <i>Rent:</i>&nbsp;&nbsp;
+                            <b  >{{model.rent_price_per_day }}/day</b>&nbsp;&nbsp;
+                            <b  >{{model.rent_price_per_week}}/week</b><hr>
+                           
+                                 
+                            </div>                                                       
+                            
+                            <a href="{% url 'polls:etx_arduino_detail' model.id  %}" class="btn btn-primary btn-block" role="button">View Details</a>
+                          </div>
+
+                    </div>
+                
+                  
+                     
+                {% endfor %}
+            {% else %}
+                
+                    <h1 class=" col-sm-12 detail_heading">  {{'NO Arduino'|upper}} </h1>
+              
+            {% endif %}
+            </div>
+                                                                          
+        </div>
+        <!-- album  end-->
+
+     
+     <!-- album filter end-->
+
+             <!-- filters -->
+
+        <div class="col-lg-2  " >  
+                <div class="albums-container container-fluid filter_index"
+                    style="width: 90%;"> 
+        
+                    <h1> ADD NEW </h1><hr>
+                        <a class="nav-link flex-column active font_size" href="{% url 'polls:book-add'  %}">
+                        <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Engg Book"|upper}}</button>
+                      </a><br>
+
+                      <a class="nav-link flex-column active font_size" href="{% url 'polls:ebook_add'  %}">
+                        <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Ebook"|upper}}</button>
+                      </a><br>
+
+                      <a class="nav-link flex-column active" href="{% url 'polls:enotes_add'  %}">
+                        <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Enotes"|upper}}</button>
+                        </a><br>
+
+                      <a class="nav-link  flex-column active" href="{% url 'polls:novel_add'  %}">
+                        <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Novel"|upper}}</button>
+                        </a><br>
+
+                      <a class="nav-link flex-column active" href="{% url 'polls:etx_add' %}">
+                        <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Etx"|upper}}</button>
+                        </a>  
+                        
+                          
+
+                </div > 
+        </div >  
+        <!-- filters end--> 
+    </div>
+
+    
+</div>
+{% endblock %}
+

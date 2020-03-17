@@ -1,0 +1,193 @@
+{% extends 'polls/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+{% block title %}Add a New Enotes{% endblock %}
+</head>
+<body>
+    {% include 'nav_for_add_new.html' %}
+{% block body %}
+
+<div class="index_page_bg"  >
+    <div class="row">
+        <!-- filters -->
+
+        <div class="col-lg-2  " >  
+                <div class="albums-container container-fluid filter_index"
+                    style="width: 90%;"> 
+        
+                    <h1> ADD NEW </h1><hr>
+                        <a class="nav-link flex-column active font_size" href="{% url 'polls:book-add'  %}">
+                        <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Engg Book"|upper}}</button>
+                      </a><br>
+
+                      <a class="nav-link flex-column active font_size" href="{% url 'polls:ebook_add'  %}">
+                        <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Ebook"|upper}}</button>
+                      </a><br>
+
+                      <a class="nav-link flex-column active" href="{% url 'polls:enotes_add'  %}">
+                        <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Enotes"|upper}}</button>
+                        </a><br>
+
+                      <a class="nav-link  flex-column active" href="{% url 'polls:novel_add'  %}">
+                        <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Novel"|upper}}</button>
+                        </a><br>
+
+                      <a class="nav-link flex-column active" href="{% url 'polls:etx_add' %}">
+                        <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Etx"|upper}}</button>
+                        </a>  
+                        
+                          
+
+                </div > 
+        </div >  
+        <!-- filters end--> 
+
+        <div class="col-lg-8" style="
+        padding:100px 200px;
+        color:maroon;   background-color: white;
+        font-family:Verdana  ;
+        width:80%;font-weight: 900;font-size: 30px;
+        text-transform: capitalize;letter-spacing: 2px;
+        ">
+        <h1 class="detail_heading">ADD A NEW Enote </h1>
+ 
+            <form  class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-lg-6">
+                      
+                        {% for ele in form %}
+                          {% if forloop.counter <= 6 %}
+                            <div class=" fieldWrapper "=>
+                                            <label for="{{ ele.id_for_label }}"></label>
+                                            {{ ele|as_crispy_field }}
+                            </div>
+                                
+                            
+                          {% endif %}
+                        {% endfor %}
+                     
+                    </div>
+
+                    <div class="col-lg-6">
+                 
+                        {% for ele in form %}
+                          {% if forloop.counter > 6 %}
+                            {% if True %}
+                                <br><div class=" fieldWrapper "=>
+                                            <label for="{{ ele.id_for_label }}"></label>
+                                            {{ ele|as_crispy_field }}
+                            </div>
+                            {% else %}
+                                <div class=" fieldWrapper "=>
+                                            <label for="{{ ele.id_for_label }}"></label>
+                                            {{ ele|as_crispy_field }}
+                            </div>
+                            {% endif %}
+                          {% endif %}
+                        {% endfor %}
+                  
+                    </div>
+                </div>
+              
+                <br><br>
+    			<div class="form-group book_create_form " >
+                  <button type="submit" class="btn text-white btn-block btn-lg detail_heading" >
+                    <b>Submit</b></button>
+        	    </div>
+            </form>
+        </div>
+
+
+        <!-- filters -->
+
+        <div class="col-lg-2  " >  
+                <div class="albums-container container-fluid filter_index"
+                    style="width: 90%;"> 
+        
+                    <h1> ADD NEW </h1><hr>
+                        <a class="nav-link flex-column active font_size" href="{% url 'polls:book-add'  %}">
+                        <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Engg Book"|upper}}</button>
+                      </a><br>
+
+                      <a class="nav-link flex-column active font_size" href="{% url 'polls:ebook_add'  %}">
+                        <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Ebook"|upper}}</button>
+                      </a><br>
+
+                      <a class="nav-link flex-column active" href="{% url 'polls:enotes_add'  %}">
+                        <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Enotes"|upper}}</button>
+                        </a><br>
+
+                      <a class="nav-link  flex-column active" href="{% url 'polls:novel_add'  %}">
+                        <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Novel"|upper}}</button>
+                        </a><br>
+
+                      <a class="nav-link flex-column active" href="{% url 'polls:etx_add' %}">
+                        <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Etx"|upper}}</button>
+                        </a>  
+                        
+                          
+
+                </div > 
+        </div >  
+        <!-- filters end--> 
+    </div>
+</div>
+
+
+
+{% endblock %}
+<script>
+
+$(document).ready(function(){
+ 
+ Dropzone.options.dropzoneFrom = {
+  autoProcessQueue: false,
+  acceptedFiles:".png,.jpg,.gif,.bmp,.jpeg",
+  init: function(){
+   var submitButton = document.querySelector('#submit-all');
+   myDropzone = this;
+   submitButton.addEventListener("click", function(){
+    myDropzone.processQueue();
+   });
+   this.on("complete", function(){
+    if(this.getQueuedFiles().length == 0 && this.getUploadingFiles().length == 0)
+    {
+     var _this = this;
+     _this.removeAllFiles();
+    }
+    list_image();
+   });
+  },
+ };
+
+ list_image();
+
+ function list_image()
+ {
+  $.ajax({
+   url:"upload.php",
+   success:function(data){
+    $('#preview').html(data);
+   }
+  });
+ }
+
+ $(document).on('click', '.remove_image', function(){
+  var name = $(this).attr('id');
+  $.ajax({
+   url:"upload.php",
+   method:"POST",
+   data:{name:name},
+   success:function(data)
+   {
+    list_image();
+   }
+  })
+ });
+ 
+});
+</script>

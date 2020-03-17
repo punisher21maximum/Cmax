@@ -1,0 +1,291 @@
+{% extends 'polls/base.html' %}
+{% block title %}HomepagE{% endblock %}
+
+
+{% block body %}
+<div class="bgg" style="padding-top: 30px;padding-bottom: 1000px;
+  ">
+    <!-- all three sections -->
+    <div class="row" style="padding-top: 50px;   ">
+
+
+      <!-- filters -->
+        <div class="col-lg-2" >  
+                <div class="albums-container container-fluid filter_index"
+                    style="width: 90%;"> 
+        
+
+                <h1> ADD NEW </h1><hr>
+                        <a class="nav-link flex-column active font_size" href="{% url 'polls:book-add'  %}">
+                        <button type="button" class="btn btn-outline-success btn-block btn-lg">{{"Engg Book"|upper}}</button>
+                      </a><br>
+
+                      <a class="nav-link flex-column active font_size" href="{% url 'polls:ebook_add'  %}">
+                        <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Ebook"|upper}}</button>
+                      </a><br>
+
+                      <a class="nav-link flex-column active" href="{% url 'polls:enotes_add'  %}">
+                        <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Enotes"|upper}}</button>
+                        </a><br>
+
+                      <a class="nav-link  flex-column active" href="{% url 'polls:novel_add'  %}">
+                        <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Novel"|upper}}</button>
+                        </a><br>
+
+                      <a class="nav-link flex-column active" href="{% url 'polls:etx_add' %}">
+                        <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Etx"|upper}}</button>
+                        </a>      
+                </div > 
+        </div >  
+        <!-- filters end--> 
+
+        <!-- middle--> 
+
+        <div class="col-lg-8 " > 
+        <div class="container-fluid detail_middle_bg" >
+        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+        
+        <div >
+        <div style="text-align:right;">
+          <h1 class="detail_heading">
+            {{ebook_model.ebook_name}} </h1><br><hr><br>
+          <h2 >Uploader : {{ebook_model.owner.username}}</h2>
+          <h2 >Author : {{ebook_model.ebook_author}}  </h2>
+        </div>
+
+        <br><br><br>
+          <div class="row">
+            
+            <!-- book image large -->
+            <div class="col-lg-6  " > 
+              <div style="padding-left:80px;" >
+                  {% if ebook_model.ebook_image %}
+                    <img src="{{ ebook_model.ebook_image.url }}" class="img-responsive "
+                    style=" height:500px; width=300px;;">
+                  {% endif %}
+                  <!-- download link -->
+                  <div style="padding-top: 25px;" >
+                      {% if ebook_model.ebook_pdf %}
+                        <a href="{{ ebook_model.ebook_pdf.url }}" class="btn  btn-outline-danger btn-lg" width=50%; target="_blank"  >
+                                Download 
+                        </a>
+                        
+                      {% endif %}
+
+                  </div>    
+                  <!-- download link end-->
+
+                  
+            </div>
+            <!-- book image large  end-->
+              </div>
+              
+
+            <br><br><br>
+            
+
+            <div class="col-lg-6  " > 
+              
+              <!--br><br><br><br><br><br><br><br><br>
+              <i>
+              <h1 >A book for web development</h1>
+              <h1>For coders with deadlines</h1>
+              <h1>Used with python</h1></i-->
+            </div>
+            <div class="col-lg-12  " >
+            <i style="text-align:center;">
+                  <h1 >A book for web development</h1>
+                  <h1>For coders with deadlines</h1>
+                  <h1>Used with python</h1></i>
+            </div>
+          </div>
+          <!-- row ends-->
+        <div><br><br>
+
+          <!-- table book info --> 
+          
+          <div><table  class="table table-striped table-bordered  table-hover "
+          style="border: 5px solid white;padding: 50px;font-size: 30px;" >
+                <thead >
+                        <tr>
+                          <th  >{{ebook_model.ebook_name}}</th>
+                        </tr>
+                       
+                  </thead>
+          <tbody > 
+           {% for name, value in ebook_model.get_fields %}                                                               
+          <tr class="{% cycle 'success' 'warning' %}" 
+          style=" border: 5px solid white;color: #990000;"
+          >
+            {% if  name == 'ebook_branch'   %}<td style="  padding:30px;"><b>Branch</b></td> 
+            <td style=" padding:30px;"><b>{{ value }}</b></td> 
+            {% endif %} 
+            {% if   name == 'ebook_year'  %}<td style="  padding:30px;"><b>Year</b></td> 
+            <td style=" padding:30px;"><b>{{ value }}</b></td> 
+            {% endif %}
+            {% if   name == 'ebook_sub'  %}<td style=" padding:30px;"><b>Subject</b></td> 
+            <td style=" padding:30px;"><b>{{ value }}</b></td> 
+            {% endif %}
+            {% if  name == 'ebook_author'  %}<td style="  padding:30px;"><b>Author</b></td> 
+            <td style=" padding:30px;"><b>{{ value }}</b></td> 
+            {% endif %}
+                                 
+          </tr>
+           {% endfor %} 
+          </tbody>
+          </table>
+          </div>
+          <!-- table book info end --> 
+          <br><br>
+           <iframe src="{{ ebook_model.ebook_drive_url }}" width="100%" height="500px"></iframe>
+
+
+          <br><hr>
+          <br>
+          <div style="font-family:verdana;color:orange;font-family:times roman;text-align:right;">
+            <h1 style="text-align:center;font-size:80px;letter-spacing: 2px;font-family:Verdana  ;">{{ebook_model.owner.username}} </h1><br><hr>
+          <br>
+          </div>
+          <!-- profile foto -->
+          <div style="padding-left:50px;">
+            {% if ebook_model.owner.owner_model.dp %}
+            <a href="{% url 'polls:detail' ebook_model.id  %}">
+            <img src="{{ ebook_model.owner.owner_model.dp.url }}" class="img-responsive" style=" 
+            width:400px;height:300px;border-radius: 7px;border:solid #f2f2f2 15px;">
+            </a>
+            {% endif %}
+          </div>
+          <!-- profile foto end -->
+          </br></br>
+          <!-- profile table -->
+          <h1 class="detail_profile">Owner</h1>
+          <div>
+            <table  class="table table-striped table-bordered table-striped table-hover "
+            style="font-size: 30px;" >
+              <!--thead><tr><th>{{ebook_model.book_name}}</th></tr></thead-->
+            <tbody>
+            {% for name, value in ebook_model.owner.owner_model.get_fields %}
+            {% if name == "branch" or name == "ac_year" or name == "address"  %}
+            <tr class=class="{% cycle 'success' 'warning' %}" 
+            style="border: 5px solid white; color:  #990000;;">
+              <td style="padding:30px;"><b>{{ name }}</b></td> 
+              <td style="padding:30px;"><b>{{ value }}</b></td> 
+            </tr>
+            {% endif %}
+            {% endfor %}
+            </tbody>
+            </table>
+          </div>
+          <!-- profile table -->
+          <!-- row end-->
+
+          <br><br><br>
+          <hr>
+
+          {% if object.owner == user %}
+          <h2 style="color:red;padding:20px;"><b>As you are the owner of this post you can update and delete your posts here.</b></h2>
+
+                    <div style="padding:30px;">
+                      <span><a style="margin:30px;"class="btn btn-outline-primary btn-lg mt-1 mb-1" 
+                        href="{% url 'polls:ebook_update' object.id %}">Update</a></span>
+                      <span>&nbsp;&nbsp;&nbsp;
+                      <a class="btn btn-outline-danger btn-lg mt-1 mb-1" 
+                      href="{% url 'polls:ebook_delete' object.id %}">Delete</a></span>
+                    </div>
+          {% endif %}
+          </div>
+          </div>
+
+
+        </div>
+      </div>
+      <!-- middle end--> 
+      <!-- filters -->
+          <div class="col-lg-2 " >  
+                  <div class="albums-container container-fluid"
+
+                      style="
+
+                      color:rgba(169,3,41,1);;   background-color: white; 
+                      font-family:monospace  ; font-size:25px;
+                      
+                      padding: 50px 15px 75px 15px;                          
+                      box-sizing: border-box; border-radius: 7px;
+                      width: 90%;
+                      
+                      text-transform: capitalize;letter-spacing: 2px;
+
+                      background-image:url('');
+
+                      -webkit-box-shadow: 3px 1px 22px 18px rgba(0,0,0,0.75);
+                      -moz-box-shadow: 3px 1px 22px 18px rgba(0,0,0,0.75);
+                      box-shadow: 3px 1px 22px 18px rgba(0,0,0,0.75);                    
+                                  "
+                      > 
+          
+
+                    <h1> ADD NEW </h1><hr>
+                          <a class="nav-link flex-column active font_size" href="{% url 'polls:book-add'  %}">
+                          <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Engg Book"|upper}}</button>
+                        </a><br>
+
+                        <a class="nav-link flex-column active font_size" href="{% url 'polls:ebook_add'  %}">
+                          <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Ebook"|upper}}</button>
+                        </a><br>
+
+                        <a class="nav-link flex-column active" href="{% url 'polls:enotes_add'  %}">
+                          <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Enotes"|upper}}</button>
+                          </a><br>
+
+                        <a class="nav-link  flex-column active" href="{% url 'polls:novel_add'  %}">
+                          <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Novel"|upper}}</button>
+                          </a><br>
+
+                        <a class="nav-link flex-column active" href="{% url 'polls:etx_add' %}">
+                          <button type="button" class="btn btn-outline-danger btn-block btn-lg">{{"Etx"|upper}}</button>
+                          </a>     
+                  </div > 
+          </div >  
+          <!-- filters end-->
+  </div>    
+  <!-- all three sections end-->
+  
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+<!--
+{% if book %}
+    <ul>
+    {% for key in book.meta.fields %}
+  <p> {{book.key}} </p>
+    {% endfor %}.
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+
+
+<h1>{{ seller.name }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+{% if latest_seller_list %}
+    <ul>
+    {% for seller in latest_seller_list %}
+  <p>bhjbhjbhk</p>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+
+-->
