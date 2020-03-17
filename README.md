@@ -6,10 +6,13 @@ Django : 2.0.2
 
 ## To run the website
 ### install in order
+
 1.install python3
+
 sudo apt-get install python3.6 #any python 3 is OK!
 
 2.install virtual environment
+
 sudo pip3 install virtualenv    or  sudo python3 -m pip install virtualenv
 
 3.install django2.0.2
@@ -33,15 +36,25 @@ $ . bin/activate
 $ cd ..
 
 4.run convimax
+
 $ ls #should give
+
 newwebsite  venv
+
 $ cd newwebsite
+
 $ ls #should give
+
 db.sqlite3  etx_app  manage.py  manage.pyc  media  newwebsite  others  owner  PayTm  polls
+
 $ python3 manage.py makemigrations
+
 $ python3 manage.py migrate
+
 $ python3 manage.py runserver
+
 open browser and go to
+
 http://localhost:8000/polls/etx/etx_index
 
 ### To close running website (server)
