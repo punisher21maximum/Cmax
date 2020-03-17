@@ -19,10 +19,13 @@ sudo python3 -m pip install django==2.0.2
 1.copy paste the complete website (main newwebsite folder) in folder_X
 
 2.create virtual environment (preferably in same folder_X)
+
 $ virtualenv -p /usr/bin/python3.6 venv #python3.x version same as installed
+
 Note : name of your virtualenv is -> venv
 
 3.activate virtual environment
+
 $ source venv/bin/activate 
 or 
 $ cd venv 
