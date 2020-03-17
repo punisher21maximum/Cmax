@@ -8,7 +8,7 @@ import datetime
 #define common max_length for all
 lenn=100
 #
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 
 #User model

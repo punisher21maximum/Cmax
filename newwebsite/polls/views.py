@@ -242,7 +242,7 @@ class EbookIndexView(generic.ListView):
         return context
 
     def get_queryset(self):
-		return Ebook_model.objects.all()
+        return Ebook_model.objects.all()
 #add form------------------------------------------------------
 class EbookCreate(LoginRequiredMixin,CreateView):
     model = Ebook_model
@@ -293,7 +293,7 @@ class NovelIndexView(generic.ListView):
         return context
 
     def get_queryset(self):
-		return Novel_model.objects.all()
+        return Novel_model.objects.all()
 
 
 
@@ -344,7 +344,7 @@ class EtxIndexView(generic.ListView):
     context_object_name = 'latest_owner_list'
     paginate_by = 9
     def get_queryset(self):
-		return Etx_model.objects.all()
+        return Etx_model.objects.all()
 #add etx form------------------------------------------------------
 class EtxCreate(LoginRequiredMixin,CreateView):
     model = Etx_model
