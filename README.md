@@ -56,7 +56,7 @@ $ python3 manage.py runserver
 
 open browser and go to
 
-http://localhost:8000/polls/etx/etx_index
+http://localhost:8000/polls/
 
 ### To close running website (server)
 
