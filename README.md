@@ -5,7 +5,7 @@ Python : 3.5
 Django : 2.0.2
 
 ## To run the website
-#install in order
+### install in order
 1.install python3
 sudo apt-get install python3.6 #any python 3 is OK!
 
@@ -15,7 +15,7 @@ sudo pip3 install virtualenv    or  sudo python3 -m pip install virtualenv
 3.install django2.0.2
 sudo python3 -m pip install django==2.0.2 
 
-## Run in order
+### Run in order
 1.copy paste the complete website (main newwebsite folder) in folder_X
 
 2.create virtual environment (preferably in same folder_X)
@@ -41,7 +41,7 @@ $ python3 manage.py runserver
 open browser and go to
 http://localhost:8000/polls/etx/etx_index
 
-## To close running website (server)
+### To close running website (server)
 
 1.on terminal press : ctrl+c
 
