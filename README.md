@@ -16,6 +16,7 @@ sudo apt-get install python3.6 #any python 3 is OK!
 sudo pip3 install virtualenv    or  sudo python3 -m pip install virtualenv
 
 3.install django2.0.2
+
 sudo python3 -m pip install django==2.0.2 
 
 ### Run in order
